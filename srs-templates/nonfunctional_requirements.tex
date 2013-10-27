@@ -55,10 +55,10 @@ of animation and game speed.
 \subsection{PER-04: Fast menu response time}
 \textbf{Description}: For the menu, response time should be reasonably fast
 so as not to infuriate users, so a 0.01-0.25 second window of lag
-time may be appropriate.
+time will be implemented.
 \subsection{PER-05: Fast in-game response time}
-\textbf{Description}: For actual gameplay, we must endeavor to provide a responsiveness
-that is near-instantaneous to the human eye. The amount of lag time
+\textbf{Description}: The actual gameplay, we must provide a responsiveness
+that appears to be near-instantaneous to the human eye. The amount of lag time
 should be less than 24-33 milliseconds for each action. This includes
 the lag time between the moment a user presses the screen to draw
 a line and when it appears on screen. It also includes the time between
@@ -111,7 +111,7 @@ for the avatar to climb.
 \subsection{ACC-06: Avatar will bounce upon touching the platform}
 \textbf{Description}: The avatar should bounce off of a platform as long as
 the avatar touches the platform and they have downward velocity.
-\subsection{ACC-03: Bounce acceleration calculation has at least 6 significant
+\subsection{ACC-03: Bounce acceleration calculation has at least 3 significant
 figures}
 \textbf{Description}: When the avatar collides with a platform the acceleration
 due to this bounce must be correctly calculated to within at least
@@ -145,11 +145,6 @@ It is accessible in the Settings menu.
 \textbf{Description}: It will be easy to add new features to the game. This
 may include game modes, power-ups, enemy types, store categories and
 avatar customization.
-\subsection{ROB-06: Human support staff for maintenance and reliability}
-\textbf{Description}: A small team of 2-3 people should be dedicated to supporting
-the reliability of the software. This includes keeping the software
-running, fixing bugs, keeping servers active, and handling complaints
-and issues from users.
 \section{Safety}
 \subsection{SAF-01: Game should be family friendly (G-rated)}
 \textbf{Description}: Game will be made suitable to play for all audiences.
@@ -212,28 +207,22 @@ features or if they does not currently have an active internet connection.
 users. For all input boxes, the use of HTML tags, JavaScript or any
 other possible code that could jeopardize the security of the game
 will not be allowed.
-\subsection{SEC-06: Data will undergo validity checks}
-\textbf{Description}: Regular data validity checks will check for and deal
-with errors in the database. Before an update is pushed, a check will
-be made to the database that will ensure that the user\textquoteright{}s
-data is not corrupt and is valid. Checksums will be used when sending
-update data to minimize errors during transmission.
-\subsection{SEC-07: Game will include a privacy policy}
+\subsection{SEC-06: Game will include a privacy policy}
 \textbf{Description}: There will be a publicly available document detailing
 how users\textquoteright{} information will be used. The user\textquoteright{}s
 agree that they are aware of the policy whenever they play the game{[}g{]}.
-\subsection{SEC-08: Game will be closed source}
+\subsection{SEC-07: Game will be closed source}
 \textbf{Description}: The game\textquoteright{}s source code will not be available
 to those outside of the development team, the Computer Science 320
 staff, and Hitpoint Studios.
-\subsection{SEC-09: The user can access only what is allowed to them}
+\subsection{SEC-08: The user can access only what is allowed to them}
 \textbf{Description}: There will be one class of users - the players. Players
 will have the same levels of access and permissions. Players will
 be able to see their Facebook friends\textquoteright{} scores and
 send them items. Players will be able to make purchases with real
 money. Players will also be able to make purchases of game items with
 the in-game currency.
-\subsection{SEC-10: Developers have full access to the game}
+\subsection{SEC-09: Developers have full access to the game}
 \textbf{Description}: Developers will have full access and permissions to all
 aspects of the software, including secure, direct access to the servers.
 \section{Platform}
