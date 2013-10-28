@@ -120,6 +120,7 @@ ms, 1 s, 2 s, \ldots{} )
 \end{itemize}
 
 \subsection{TES-1.3: Bouncing Behavior }
+\label{bounce}
 \begin{itemize}
 \item Goal: Show that the avatar will bounce off of objects in game, that
 its trajectory changes in a fun and intuitive fashion 
@@ -222,9 +223,10 @@ the game or restart their playthrough from the pause menu.
 \item Test cases: 
 
 \begin{itemize}
-\item User starts game, presses pause button. 
+\item User manually starts game, presses pause button. 
 \item From pause menu, user attempts to quit game. 
 \item From pause menu, user attempts to restart game.
+\item All of this will be performed manually by a tester, without using additional software.
 \end{itemize}
 \item Capture the output 
 
@@ -247,6 +249,7 @@ the game or restart their playthrough from the pause menu.
 \end{itemize}
 
 \subsection{TES-2.2: Lethal Hazards }
+\label{hazard}
 \begin{itemize}
 \item Goal: Show that contact of the player\textquoteright{}s avatar with
 lethal hazards results in a lost game state as intended. 
@@ -255,6 +258,7 @@ lethal hazards results in a lost game state as intended.
 \begin{itemize}
 \item User\textquoteright{}s avatar makes contact with enemy avatar. 
 \item User\textquoteright{}s avatar makes contact with bottom of screen. 
+\item All of this will be performed manually by a tester without the use of additional software.
 \end{itemize}
 \item Capture the output 
 
@@ -284,6 +288,7 @@ playthrough.
 \begin{itemize}
 \item Background the Line Bounce application mid-playthrough. 
 \item Exit the Line Bounce application mid-playthrough. 
+\item All of this will be performed manually by a tester without the use of additional software.
 \end{itemize}
 \item Capture the output 
 
@@ -314,6 +319,7 @@ the game state.
 \begin{itemize}
 \item In a playthrough, climb to 10{[}a{]},000 feet. 
 \item In a playthrough, climb to 100,000 feet. 
+\item All of this will be performed manually by a tester without the use of additional software.
 \end{itemize}
 \item Capture the output 
 
@@ -397,6 +403,7 @@ and perform the required functions across all platforms.
 \end{itemize}
 
 \subsection{TES-3.2: The menu will have fast response time }
+\label{menu}
 \begin{itemize}
 \item Goal: Show that the menu feature response times satisfy the performance
 requirements stated in PER-04. 
@@ -417,6 +424,298 @@ requirements stated in PER-04.
 (PER-04 as of 10/18/13) 
 \end{itemize}
 \item Generate report \end{itemize}
+\section{Frontend (what the user sees)}
+\subsection{Transitions}
+\subsection{Pages}
+\subsection{Gameview}
+\subsubsection{Scrolling (In-Game)}
+\section{Backend - Admin}
+\section{Backend - Game}
+
+
+\section{TSS-09 for Main Menu}
+\begin{itemize}
+\item Goal: Determine that all aspects of the Main Menu function properly and satisfy
+performance requirements.
+\item Resources Required: 
+
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Pressing each button sends user to the appropriate screen.
+\item All buttons and redirects function in accordance with Performance specifications.
+
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-9.1: Menu buttons all redirect the user properly }
+\begin{itemize}
+\item Goal: Show that all buttons on the menu are functional, and redirect the user to the appropriate page.
+\item Test cases: 
+
+\begin{itemize}
+\item Test every main menu button to make sure it redirects correctly.
+
+\begin{itemize}
+\item Tester manually presses PLAY button.
+\item Tester manually presses LEADERBOARDS button.
+\item Tester manually presses SHOP button.
+\item Tester manually presses INVITE FRIEND button.
+\item Tester manually presses Settings icon.
+
+\end{itemize}
+
+\end{itemize}
+\item Capture the output
+\begin{itemize}
+\item Tester manually saves test results into a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Pressing PLAY takes user to pre-game powerup selection menu.
+\item Pressing LEADERBOARDS takes user to the leaderboards screen.
+\item Pressing SHOP takes user to the store.
+\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
+\item Pressing Settings icon takes user to Settings.
+\end{itemize}
+\item Generate report
+\end{itemize}
+
+\subsection{TES-9.2: Menu buttons respond with minimal delay}
+\begin{itemize}
+\item Goal: Show that all buttons on the main menu respond with minimal delay.
+\item Test Cases: 
+\begin{itemize}
+\item \ref{menu}
+\end{itemize}
+\item Capture the output
+\begin{itemize}
+\item Tester manually saves test results into a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Pressing PLAY takes user to pre-game powerup selection menu.
+\item Pressing LEADERBOARDS takes user to the leaderboards screen.
+\item Pressing SHOP takes user to the store.
+\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
+\item Pressing Settings icon takes user to Settings.
+\end{itemize}
+\item Generate report
+\end{itemize}
+
+
+
+\section{TSS-10 for Enemies}
+\begin{itemize}
+\item Goal: Determine that all aspects regarding Enemies perform as specified in the requirements.
+\item Resources Required: 
+
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Enemy generation occurs randomly, but according to a formula: FUN-30 
+\item An Enemy is destroyed if the user's avatar makes contact with its top half.
+\item Contact with the bottom half of an Enemy causes the player to lose: ACC-07
+\item Enemies are stationary.
+
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-10.1: Enemy Generation occurs randomly, and follows preset formula correctly }
+\begin{itemize}
+\item Goal: Show that enemies are generated randomly according to a formula that is based 
+on the player's current ingame score and the player's overall experience level.
+\item Test cases: 
+
+\begin{itemize}
+\item Test enemy generation based on height and level
+
+\begin{itemize}
+\item Write code that increments each time an enemy is generated and records the score and user's experience
+level at the time of capture.
+\item Repeat for a statistically significant number of playthroughs, with a range of user levels.
+
+\end{itemize}
+
+\end{itemize}
+\item Capture the output
+\begin{itemize}
+\item Save all test outputs and collect information into a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Compare the formula for enemy generation against the spreadsheet data to determine accuracy.
+\end{itemize}
+\item Generate report
+\end{itemize}
+
+\subsection{TES-10.2: Destroying Enemies }
+\begin{itemize}
+\item Goal: Show that the functionality of destroying enemies by making contact between
+the user's avatar and the top half of the enemy works properly and accurately.
+\item Test cases: 
+
+\begin{itemize}
+\item Test to make sure enemies are destroyed by touching top half. 
+
+\begin{itemize}
+\item User manually plays line bounce and contacts top half of an enemy with the avatar.
+\item User repeats this process for every type of enemy that appears ingame. 
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User writes down results
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item All enemy types should respond to being touched on top with destruction.
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-10.3: Enemies As Hazard }
+\begin{itemize}
+\item Goal: Show that the functionality of destroying enemies by making contact between
+the users avatar and the top half of the enemy works properly and accurately.
+\item Test cases: 
+
+\begin{itemize}
+\item \ref{hazard}
+\item Repeat for each enemy type.
+\item This test will be performed manually by a tester without the use of testing software.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item If the avatar makes contact with any enemy type from the bottom, it should result in a lost game. 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-10.4: Enemy Movement }
+\begin{itemize}
+\item Goal: Show that enemies do not move under any circumstances, and disappear when they are destroyed.
+\item Test cases: 
+
+\begin{itemize}
+\item Test to make sure enemies don't move.
+\begin{itemize}
+\item Tester manually plays game and encounters all enemy types.
+\item Tester keeps spreadsheet and records enemy behavior before and after destroying that enemy.
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item For each enemy type, that enemy should not move, and should disappear when destroyed.
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\section{TSS-11 for Lines}
+\begin{itemize}
+\item Goal: Determine that all mechanics of lines function properly, and satisfy requirements
+for robustness and accuracy.
+
+\item Resources Required:
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Line Spool feature functions properly.
+\item Bounce mechanics function correctly, including bounce-to-length ratio.
+\item Lines do not interact with enemies.
+
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-11.1: Line Spool }
+\begin{itemize}
+\item Goal: Show that Line Spool feature works properly, according to functional specifications.
+\item Test cases: 
+
+\begin{itemize}
+\item Test that Line Spool only gives the player a length of line equal to the screen width to draw.
+\begin{itemize}
+\item Write test code to measure screen width and compare it to the length of lines drawn.
+\item Tester manually draws longest possible line, which should not exceed one screen width.
+\item After using up total Line Spool, tester manually draws more lines. 
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Total line length drawable at once may not exceed one screen width.
+\item When all Line Spool is used up, drawing one additional line should erase the first line drawn
+refunding an amount of line spool equal to the length of the erased line. 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-11.2: Bounce Mechanics }
+\begin{itemize}
+\item Goal: Show that the Bounce Mechanics regarding lines work properly, including
+bounce-to-length ratio. 
+\item Test cases: 
+
+\begin{itemize}
+\item \ref{bounce}
+\end{itemize}
+\item Capture the output
+\begin{itemize}
+\item User records all bounce heights and directions in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+\begin{itemize}
+\item \ref{bounce}
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
 \section{Frontend (what the user sees)}
 \subsection{Transitions}
 \subsection{Pages}
