@@ -1,6 +1,12 @@
-Welcome to your Platino Mobile Project
+Moving forward we'll be transferring to using the Starling framework for Flash/ActionScript3
 
-This is a Platino-ready single window application with a single view - a blank canvas. Requires Titanium Mobile SDK 3.1.1+
+Starling: The bird.
+http://www.lloydspitalnikphotos.com/d/1309-4/european_starling_MG_0745.jpg
 
-----------------------------------
-Platino is Copyright (c) 2012-2013 by Lanica, Inc. All Rights Reserved.
+Starling Framework: The official website.
+http://gamua.com/starling/
+
+Video Series: A large video series that goes into depth about Starling. Claims to assume you have "intermediate" flash knowledge to understand it, but it isn't needed at all to understand it. Also explains how to set-up Starling and Flash related accessories. The videos are long (15-20 minutes), but if you have zero flash knowledge, then you'll see a lot of syntax, as well as some basic but important game coding practices. You can also follow along with the videos using the resources he provides build the same game that he is.
+http://www.youtube.com/watch?v=RTvhZ8wbJaQ
+
+Programs needed to get started should have trial versions. I'll work on compiling a list of programs that we'll eventually "acquire".
