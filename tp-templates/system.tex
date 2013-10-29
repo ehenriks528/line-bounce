@@ -482,7 +482,8 @@ performance requirements.
 \item Evaluate the result: 
 
 \begin{itemize}
-\item Pressing PLAY takes user to pre-game powerup selection menu.
+\item \label{select}
+Pressing PLAY takes user to pre-game powerup selection menu.
 \item Pressing LEADERBOARDS takes user to the leaderboards screen.
 \item Pressing SHOP takes user to the store.
 \item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
@@ -711,6 +712,303 @@ bounce-to-length ratio.
 \item Evaluate the result: 
 \begin{itemize}
 \item \ref{bounce}
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
+
+
+\section{TSS-12 for Pregame Powerup Selection}
+\begin{itemize}
+\item Goal: Determine that the pregame powerup selection menu works properly and in accordance
+with performance and accuracy requirements. FUN-35
+for robustness and accuracy.
+
+\item Resources Required:
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Powerup Selections work properly.
+\item Powerup Selection menu functions quickly and accurately.
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-12.1: Powerup Selections Work Properly }
+\label{powerups}
+\begin{itemize}
+\item Goal: Show that all functionality related to powerup selections works properly. 
+\item Test cases: 
+
+\begin{itemize}
+\item Test that all powerups the user owns can be selected from the pregame menu, and that selection works properly.
+\begin{itemize}
+\item Tester manually selects all powerups before playthrough from the pregame menu.
+\item Tester manually observes the number of powerups before and after selection.
+\item Tester manually observes whether all powerups selected appear ingame.
+\end{itemize}
+\item Test that powerup selections menu appears when the PLAY button is pressed from Main Menu.
+\begin{itemize}
+\item \ref{select}
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records all results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item The count of any powerup selected from the menu should drop by one after it is used.
+\item Any and all items selected from the menu should appear and be active ingame.
+\item All powerups on the menu should be selectable.
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-12.2: Powerup Selections Work Properly }
+\begin{itemize}
+\item Goal: Show that the powerup selections menu functions quickly and accurately. 
+\item Test cases: 
+
+\begin{itemize}
+\item Test that the menu responds quickly to input.
+\begin{itemize}
+\item \ref{menu}
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\item Evaluate the result: 
+
+\begin{itemize}
+\item \ref{menu}
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
+
+
+\section{TSS-13 for Post Game Menu}
+\begin{itemize}
+\item Goal: Determine that the Post Game menu contains the appropriate content, and functions robustly and accurately.
+
+for robustness and accuracy.
+
+\item Resources Required:
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Post game menu appears after game ends and offers the player a chance to start a new game, post a score to the Social page, 
+go to the Store, go to the leaderboards or return to the Main Menu. FUN-08
+
+\item Post game menu functions quickly and accurately. PER-04
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-13.1: Post Game Menu Selections Work Properly }
+\begin{itemize}
+\item Goal: Show that all functionality related to post game menu selections works properly. 
+\item Test cases: 
+
+\begin{itemize}
+\item Tester manually loses a game by force closing the application mid-playthrough, then re-opens the application.
+\item Tester manually loses a game by contacting an enemy, and by falling through the bottom, and records the next screen.
+\item Tester manually attempts to start a new game from the game over menu.
+\item Tester manually attempts to post their score to the leaderboards from the game over menu.
+\item Tester manually attempts to go to the STORE from the game over menu.
+\item Tester manually attempts to go to the leaderboards from the game over menu.
+\item Tester manually attempts to return to the Main Menu from the game over menu.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records all results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Result of force-closing the app mid-playthrough and reopening should NOT land the tester at the Game Over menu.
+\item Result of losing the game by contacting enemy or falling through bottom SHOULD direct the tester to Game Over menu.
+\item Starting a new game through the Game Over menu should bring the tester to the Pregame Powerup Selection menu.
+\item Attempting to post the score to leaderboards through the Game Over menu should post the score to leaderboards.
+\item Attempting to go to the store from Game Over menu should direct the tester to the Store.
+\item Attempting to go to the leaderboards from the Game Over Menu should direct the tester to the leaderboards.
+\item Attempting to go to the main menu from the Game Over Menu should direct the tester to the leaderoards.
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-13.2: Game Over Menu Works Properly }
+\begin{itemize}
+\item Goal: Show that the Game Over menu functions quickly and accurately. 
+\item Test cases: 
+
+\begin{itemize}
+\item Test that the menu responds quickly to input.
+\begin{itemize}
+\item \ref{menu}
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\item Evaluate the result: 
+
+\begin{itemize}
+\item \ref{menu}
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
+
+\section{TSS-14 for Powerups}
+\begin{itemize}
+\item Goal: Determine that all functionality related to Powerups functions properly and with respect to performance, accuracy, and robustness requirements.
+
+for robustness and accuracy.
+
+\item Resources Required:
+\begin{itemize}
+\item User Hours 
+\item TWO iPhones
+\item TWO Android Phones
+\item TWO Computers
+\item Internet Connection 
+\item Server
+\end{itemize}
+\item Structure of the Test Plan: 
+
+\begin{itemize}
+
+\item Powerups selected from the Pregame Powerup Selections Menu appropriately function ingame. FUN-12
+\item Powerups obtained ingame are successfully acquired upon touching the avatar, and activate immediately. FUN-11
+\item Functionality related to sending and receiving Powerups to and from friends works properly. FUN-27
+
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-14.1: Preselected Powerups Function Appropriately }
+\begin{itemize}
+\item Goal: Show that all functionality related to preselected Powerups works properly. 
+\item Test cases: 
+
+\begin{itemize}
+\item \ref{powerups}
+\item Tester manually keeps track of all powerups selected from the pregame powerup selection menu, and verifies that all
+icons are displayed onscreen during the game.
+\item Tester manually keeps track of all powerups selected from the pregame powerup selection menu, and verifies each one 
+activates at the appropriate time during the playthrough.
+\begin{itemize}
+\item Tester Equips a SHIELD powerup before game, and makes contact with an Enemy from the bottom.
+\item Tester Equips an on-death powerup before game, and makes contact with an Enemy from the bottom. Repeats and falls off the bottom.
+\item Tester Equips an on-start item before game, and starts a playthrough.
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records all results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item All powerups preselected have their icons appear on the screen, and these icons are removed once the item is used up.
+\item SHIELD powerup lasts around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
+\item On-death powerups from the pregame powerup selections menu activate whenever the avatar is about to die.
+\item On-start powerups from the pregame powerup selections menu activate immediately upon the avatar touching the ground at the start of a game.
+
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
+
+\subsection{TES-14.2: Powerups Acquired Ingame}
+\begin{itemize}
+\item Goal: Show that all functionality related to ingame-acquired powerups functions properly.
+\item Test cases: 
+
+\begin{itemize}
+\item Test code is written to release all powerup types IN-GAME, and the tester manually makes contact between his/her avatar and
+the released powerups.
+\item Tester manually observes the effects of all powerups acquired IN-GAME, and whether they activate at the appropriate time.
+\begin{itemize}
+\item Tester acquires a SHIELD powerup ingame, and makes contact with an Enemy from the bottom.
+\item Tester acquires an on-death powerup before game, and makes contact with an Enemy from the bottom. Repeats and falls off bottom.
+\end{itemize}
+\item Tester manually observes whether an item acquired ingame and stored has an icon appear for it onscreen.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records all results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Any powerup the avatar touches ingame is immediately acquired, and depending on the type of powerup, stored or activated immediately.
+\item All powerups acquired ingame have their icons appear on the screen, and these icons are removed once the item is used up.
+\item SHIELD powerup should last around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
+\item On-death powerups acquired ingame activate when the avatar is about to die by any lethal means.
+\item Powerups lose their ingame on-screen icons while actively in use.
+
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+
+\subsection{TES-14.3: Sending And Receiving Powerups }
+\begin{itemize}
+\item Goal: Show that all functionality related to sending and receiving powerups to and from other users works properly.
+\item Test cases: 
+
+\begin{itemize}
+
+\item Tester manually enters the leaderboards and presses the arrow next to a friend's name, expected to bring up a powerup selection menu.
+\item Tester manually enters the Send Powerup selection menu, and selects all options for powerups to be sent.
+\item Tester manually attempts to send a powerup to a friend immediately after sending a powerup to the same friend.
+\item Test code is written to alter the user experience level, and tester manually observes the change in what selection of powerups the tester can send to friends.
+\item One tester manually sends powerup to another, other tester manually tests the time until it is received, using a stopwatch. This
+test is to be repeated with every combination of two devices that the game runs on.
+\item Tester manually attempts to send a powerup without an internet connection.
+\item Tester who received a powerup from a friend attempts to observe a Facebook notification alerting them they received a powerup.
+\item Tester who received a powerup observes their owned powerups, and the powerup they just received should appear there.
+
+
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item User records all results in a spreadsheet.
+\end{itemize}
+\item Evaluate the result: 
+
+\begin{itemize}
+\item Pressing the arrow on leaderboards next to a username is expected to bring up the powerup selections menu.
+\item Selecting and sending any powerup to a friend from the powerup selection menu should render the user incapable of sending
+any further powerups to that same user for an entire day. This means the user cannot access the Send Powerup selection menu for 
+that recipient for another day, and the arrow on leaderboards next to that username is grayed out.
+\item A user with a higher experience level should be able to send a wider selection of powerups to their friends.
+\item In all cases of one tester sending a powerup to another, regardless of which two devices are used, the recipient should
+receive the powerup in under five minutes, provided both have an internet connection.
+\item Without an internet connection, the tester should receive an error when attempting to send a powerup to a friend.
+\item When a user receives a powerup, they also promptly receive a Facebook notification alerting them of this, provided notifications are not disabled.
+\item When a user receives a powerup, that powerup should promptly appear as an option in their pregame powerup selections menu, and it should
+reflect as being owned in the Store.
 \end{itemize}
 \item Generate report 
 \end{itemize}
