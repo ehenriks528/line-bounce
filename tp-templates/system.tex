@@ -1,179 +1,271 @@
-\chapter{System Test Plan}
-\section{TSS-01 for Movement Mechanics }
+\chapter{System Level Testplan}
+\section{TSS-01 for Movement Mechanics}
 \begin{itemize}
-\item Goal: Determine that the jumping mechanics for the character in Line
-Bounce work robustly and accurately. 
-\item Resources Required: User (tester), iPhone, Android Phone, Computer,
-Time. 
-\item Structure of the Test Plan (Applicable TES list): 
+\item Goal: Determine that the jumping mechanics for the character in Line Bounce work robustly and accurately.
 
+\item Structure of the Test Plan (Applicable TES list):
 \begin{itemize}
-\item FUN-01 (game start movement) 
-\item pausing (FUN-18) 
-\item bouncing behavior 
+\item game start movement (GAME-01)
+\item pausing (GAME-09)
 
+\item bouncing behavior
 \begin{itemize}
-\item FUN-02, FUN-45 (top of lines, velocity change) 
-\item FUN-05, FUN-45 (bottom of lines, velocity change) 
-\item FUN-06, FUN-19 (bouncing off walls, velocity change) 
-\item FUN-23 (platform size affecting velocity) 
+\item top of lines, velocity change (GAME-02)
+\item bottom of lines, velocity change (GAME-05)
+\item bouncing off walls, velocity change (GAME-06)
+\item platform size affecting velocity (GAME-12)
 \end{itemize}
-\item off-screen movement 
 
+\item off-screen movement
 \begin{itemize}
-\item FUN-03 (falling off (bottom of) screen) 
-\item FUN-04 (moving up (top of) screen) 
+\item falling off (bottom of) screen (GAME-03)
+\item moving up (top of) screen (GAME-04)
 \end{itemize}
-\item collisions 
 
+\item collisions
 \begin{itemize}
-\item FUN-11, FUN-22 (power-up collection, activation, -doesn\textquoteright{}t
-affect movement-) 
-\item FUN-03 (touching enemies falling off screen ending game) 
-\item FUN-46 (movement affecting score) 
+\item power-up collection, activation, -doesn\textquoteright{}t affect movement- (GAME-08)
+\item touching enemies falling off screen ending game (GAME-03)
 \end{itemize}
-\end{itemize}
-\item Resources needed: 
 
+\item movement affecting score (GAME-18)
+\end{itemize}
+
+\item Resources needed:
 \begin{itemize}
-\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and
-web browser) 
-\item Timing software 
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Trajectory measuring software
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-1.1: Game Start State }
-\begin{itemize}
-\item Goal: Show that the avatar, at the start of a game, will start at
-the top center of the user\textquoteright{}s screen and accelerate
-in the -y direction only 
 
+\subsection{TES-1.1: Game Start State}
 \begin{itemize}
-\item Set a time bound (?) 
-\end{itemize}
-\item Testcases: 
-
+\item Goal: Show that the avatar, at the start of a game, will start at the top center of the user\textquoteright{}s screen and accelerate in the -y direction only
 \begin{itemize}
-\item Try starting game with several different avatar/power up combinations 
-\item Try pausing game, ending it, and then starting it again (does the
-game state get cleared when starting new game?) 
-\end{itemize}
-\item Capture the output 
-
-\begin{itemize}
-\item Measure elapsed time 
-\item Measure start location 
-\item Measure acceleration 
-\end{itemize}
-\item Evaluate the output data 
-
-\begin{itemize}
-\item compare to expected data (in terms of the goals) 
-\end{itemize}
-\item Generate report 
-
-\begin{itemize}
-\item Produce summary of generated reports 
-\item Evaluate summary with respect to goal
-\end{itemize}
+\item start location determined by screen resolution - calculate beforehand
+\item velocity acceleration should be determined globally (or change with powerup)
 \end{itemize}
 
-\subsection{TES-1.2: Pausing }
+\item Testcases
 \begin{itemize}
-\item Goal: Show that, while in a pause state, all moving objects halt in
-place, but exiting the pause state will restore original movement 
-
-\begin{itemize}
-\item resumes gameplay in a coherent fashion that will not break the user\textquoteright{}s
-immersion in the game 
-\item objects originally moving in a certain trajectory will not suddenly
-change trajectory for no reason (see TES-1.3) 
-\item Game state will be saved (see TES 2.1) 
+\item Unit testing on game start: avatar skin, powerup permutations
+\item Human confirmation
 \end{itemize}
-\item Testcases: 
 
+\item Capture the output
 \begin{itemize}
-\item try tapping the pause/resume button on several different occasions
-coinciding with various events 
-\item try tapping the button at various time interval increments (ex. 50
-ms, 1 s, 2 s, \ldots{} ) 
+\item Measure start location, avatar (equip) state, avatar’s velocity/acceleration
+\item Visual capture
 \end{itemize}
-\item Capture the output 
 
+\item Evaluate the output data
 \begin{itemize}
-\item measure trajectories before entering/after leaving pause state. 
-\item measure elapsed response time and record qualitative response behavior 
+\item compare control variables to to captured data:
+\begin{itemize}
+\item success = they match and avatar has correct start location and velocity/acceleration
+\item failure otherwise
 \end{itemize}
-\item Evaluate the numeric result 
 
-\begin{itemize}
-\item compare trajectories 
-\item evaluate response time and behavior with those expected 
+\item visual evaluation: success if nothing seems wrong with respect to the goals
 \end{itemize}
-\item Generate report 
 
+\item Generate report
 \begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-1.2: Pausing}
+\begin{itemize}
+\item Goal: Show that, while in a pause state, all moving objects halt in place, but exiting the pause state will restore original movement
+\begin{itemize}
+\item resumes gameplay in a coherent fashion that will not break the user\textquoteright{}s immersion in the game
+\item objects originally moving in a certain trajectory will not suddenly change trajectory for no reason (see TES-1.3)
+\item Game state will be saved (see TES 2.1)
+\end{itemize}
+
+\item Testcases:
+\begin{itemize}
+\item unit testing on state transition: active to paused to active again
+\begin{itemize}
+\item simulate pause/resume button pressed events
+\end{itemize}
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item measure all states involved
+\end{itemize}
+
+\item Evaluate the results
+\begin{itemize}
+\item compare the two active states, check pause state
+\begin{itemize}
+\item successful if the two states are exactly the same; pause state should be different and contain no movement
+\item failure otherwise
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
 \end{itemize}
 \end{itemize}
 
 \subsection{TES-1.3: Bouncing Behavior }
 \label{bounce}
 \begin{itemize}
-\item Goal: Show that the avatar will bounce off of objects in game, that
-its trajectory changes in a fun and intuitive fashion 
+\item Goal: Show that the avatar will bounce off of objects in game, that its trajectory changes in a fun and intuitive fashion 
 
 \begin{itemize}
-\item avatar will only change from -y to +y velocity when colliding with
-the top of drawn lines (see FUN-02, FUN-45) 
-\item no component of avatar\textquoteright{}s velocity will be affected
-upon colliding with the bottoms of lines (see FUN-05, FUN-45) 
-\item side walls (left and right) are \textquotedblleft{}solid\textquotedblright{}:
-avatar will reverse x velocity upon collision (see FUN-06, FUN-19) 
-\item shorter drawn platforms will give more of a boost than longer drawn
-ones (see FUN-23) 
+\item avatar will only change from -y to +y velocity when colliding with the top of drawn lines 
+\item avatar will only change from +y to -y velocity when colliding with the top of drawn lines
+\item side walls (left and right) are \textquotedblleft{}solid\textquotedblright{}: avatar will reverse x velocity upon collision
+\item shorter drawn platforms will give more of a boost than longer drawn ones
 \end{itemize}
+
 \item Testcases: 
-
 \begin{itemize}
-\item test various different environments in isolated conditions from the
-bullets described in goals (ex. avatar with a velocity such that it
-will collide with the top of a line only) 
-\item test various different environments in various conditions from the
-bullets described in goals (ex. avatar with a velocity such that it
-will collide with the bottom of a line after colliding with the top
-of a line) 
-\item test the above two with different combinations of avatars, power-ups
-that are in active/inactive statuses, arbitrarily placed lines (ranging
-from extremely condensed to sparsely place ones) 
+\item unit testing on avatar-line collisions: top of line and avatar collision, bottom of line and avatar collision, avatar 
+\item unit testing on avatar wall collision 
+\item both unit tests should have different combinations of avatars, powerups permutations, input speeds, input angles
+\item Human confirmation 
 \end{itemize}
+
 \item Capture the output 
-
 \begin{itemize}
-\item measure trajectories before/after each collision 
-\item measure elapsed response time and record qualitative response behavior 
+\item measure trajectories, avatar state, powerup state, and line state before/after each collision 
+\item visual capture 
 \end{itemize}
-\item Evaluate the numeric result 
 
+\item Evaluate the results
 \begin{itemize}
-\item organize data and compare trajectories with relevant goals 
-\item evaluate response time and behavior with relevant goals 
+\item compare captured data with expected data (based off input)
+\begin{itemize}
+\item successful if trajectories are reflected, but everything else should match
+\item failure otherwise
+\end{itemize}
 \end{itemize}
 \item Generate report 
 
 \begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
 \end{itemize}
 \end{itemize}
+
 
 \subsection{TES-1.4: Off-Screen Movement}
+\begin{itemize}
+\item Goal: Show that the screen will follow the avatar when moving up the screen, but dies when falling down the screen
 
-\subsection{TES-1.5: Collisions}
+\item Testcases
+\begin{itemize}
+\item Unit testing on avatar position: input all y coordinates that exit on screen and extend off screen by the avatar’s diameter
+\item Human confirmation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item Measure game state
+\item Visual capture
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare game state with respect to vertical location
+\begin{itemize}
+\item success = high vertical location always maintain active game play state; threshold low vertical location triggers game over state
+\item failure otherwise
+\end{itemize}
+\item visual evaluation: success if nothing seems wrong with respect to the goals
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES-1.5: Avatar Collisions}
+\begin{itemize}
+\item Goal: Show that the avatar behaves differently in reaction to collisions with various objects
+
+\item Testcases
+\begin{itemize}
+\item Unit testing on avatar line collisions: (see bouncing behavior)
+\item Unit testing on avatar wall collisions: (see bouncing behavior)
+\item Unit testing on avatar enemy behavior: from above, from below
+\item Human confirmation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item measure trajectories, avatar state, powerup state, and line state before/after each collision
+\item visual capture
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare captured data with expected data (based off input)
+\begin{itemize}
+\item successful if reflected trajectories, but everything else should match
+\item failure otherwise
+\end{itemize}
+\item compare before/after avatar state (trajectory), enemy state
+\begin{itemize}
+\item successful if before avatar y-component is lower than enemy's; after game state is game over OR before avatar y-component is greater than enemy's; after game state is active, avatar trajectory is reflected, enemy is dead
+\item failure otherwise
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
 
 \subsection{TES-1.6: Movement Affecting Score}
+\begin{itemize}
+\item Goal: Show that the avatar’s \textquotedblleft{}height\textquotedblright{} increases score
+
+\item Testcases
+\begin{itemize}
+\item Unit testing on avatar “height” increase: input randomly generated positive numbers as avatar height with a randomly generated positive increase
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item Measure “height” and score before and after increase
+\begin{itemize}
+\item calculate difference
+\end{itemize}
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare game state with respect to vertical location
+\begin{itemize}
+\item success = positive difference
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with respect to the goal
+\end{itemize}
+\end{itemize}
+
 
 \section{TSS-02 for Game State Mechanics }
 \begin{itemize}
@@ -425,9 +517,320 @@ requirements.
 \item Generate report 
 \end{itemize}
 
-\section{placeholder4}
-\section{placeholder5}
-\section{placeholder6}
+
+
+\section{TSS-04 for Store}
+\begin{itemize}
+\item Goal: Determine that the store is selectively accessible and accurately handles item display and purchase
+
+\item Structure of the Test Plan (Applicable TES list):
+\begin{itemize}
+\item Accessibility
+\begin{itemize}
+\item facebook authentication (SET-01)
+\item fast response time (PER-07)
+\end{itemize}
+
+\item Product Display/Transaction
+\begin{itemize}
+\item store will have many items (MENU-03)
+\item store will categorize items (ENV-10)
+\item history will be stored on secure database center (SEC-03)
+\end{itemize}
+\end{itemize}
+
+\item Resources needed:
+\begin{itemize}
+\item User(tester)
+\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
+\item Relevant software (testing automation)
+\item Timing software
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES-4.1 Accessibility}
+\begin{itemize}
+\item Goal: Show that the store will be accessible only when logged into the facebook, all responses will take 5 or fewer seconds
+
+\item Testcases
+\begin{itemize}
+\item Unit testing on store button pressed event with different user login states
+\item Human confirmation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item Measure store state and reaction time
+\item visual confirmation
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare store state with respect to login state
+\begin{itemize}
+\item successful if user logged in maps to open store; user logged out maps to closed store; total time doesn’t exceed 5 seconds
+\item failure otherwise
+\end{itemize}
+\item human confirmation - success if nothing seems out of the ordinary
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES-4.2 Product Display/Transaction}
+\begin{itemize}
+\item Goal: Show that the store items will be display in accordance with experience level, user login state, and previous purchases and that there will be a multiple selections from multiple categories
+
+\item Testcases
+\begin{itemize}
+\item Unit testing on store login state: (see TES 4.1)
+\item Unit testing on experience level: randomly generate positive numbers to simulate user level
+\begin{itemize}
+\item simulate purchase, do for each item category
+\end{itemize}
+\item Human confirmation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item capture store state/prompts, purchasable product list, currency state
+\item visual confirmation
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare purchasable product lists across inputs
+\begin{itemize}
+\item success(a): lists for lower levels should be contained by higher level lists
+\end{itemize}
+\item compare purchasable product list before and after purchase
+\begin{itemize}
+\item success(b): powerups: before and after lists match, coin decrement, coins: lists match, purchase confirmation, coin increment, fb transaction, wearable item:	 purchased item not in the after list, coin decrement
+\item failure otherwise
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
+\section{TSS-05 for Accuracy/Input Detection}
+\begin{itemize}
+\item Goal: Determine that inputted gestures are being interpreted correctly by the game
+\begin{itemize}
+\item preparedness for intended input (swiping)
+\item preparedness for unintended input (tapping, multi-finger drag, etc.)
+\item response timing: is it less than 24-33 ms (PER-05)
+\end{itemize}
+
+\item Structure of the Test Plan (Applicable TES list):
+\begin{itemize}
+\item intended input and response
+\begin{itemize}
+\item accurate input response (ACC-01)
+\item straight line approximation (ACC-02)
+\item large finger compatibility (ACC-04)
+\end{itemize}
+
+\item unintended input and response
+\begin{itemize}
+\item accidental touches (ACC-03)
+\item input from mixed devices
+\end{itemize}
+\end{itemize}
+
+\item Resources needed:
+\begin{itemize}
+\item User(tester)
+\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
+\item Relevant software (testing automation)
+\item Timing software
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES-5.1 Response to Intended Input}
+\begin{itemize}
+\item Goal: Show that the game accurately responds to input 
+
+\item Testcases
+\begin{itemize}
+\item Human tester will communicate with isolated input detection and simulate different finger thicknesses by swiping with pinky (thin) to thumb (thick)
+\item Unit testing: mouse click and drag events, insert inputted human testcases
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item record response time
+\item capture and store resulting line, visually
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item success if response time meets goal
+\item visually compare expected trajectory - if the tester isn’t surprised by resulting line and the line is straight, it’s a success
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES-5.2 Response to Unintended Input}
+\begin{itemize}
+\item Goal: Show that the game accurately detects and/or appropriate responds to unintended input
+
+\item Testcases
+\begin{itemize}
+\item Unit testing: input different categories of input device events (keyboard, mouse click(s))
+\item Human tester will communicate with isolated input detection and simulate: accidental touches
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item capture game state and responses (resulting line/state)
+\item visual confirmation
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare before and after game state
+\begin{itemize}
+\item success if there is no response/change of state
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+
+\section{TSS-06 for Scoring}
+\begin{itemize}
+\item Goal: Determine that the score gets calculated, displayed, and stored
+
+\item Structure of the Test Plan (Applicable TES list):
+\begin{itemize}
+\item In-Game Display (GAME-18)
+\begin{itemize}
+\item game start, during gameplay
+\end{itemize}
+
+\item after death (see leaderboards)
+\item Posting Scores (SOC-01)
+
+\item Storing Scores
+\begin{itemize}
+\item high score storage (SEC-03)
+\item archives (SOC-02)
+\end{itemize}
+\end{itemize}
+
+\item Resources needed:
+\begin{itemize}
+\item User(tester)
+\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
+\item Relevant software (testing automation)
+\item Timing software
+\end{itemize}
+\end{itemize}
+
+
+\subsection{TES 6.1 In-Game Display}
+\begin{itemize}
+\item Goal: Show that the scoring during game play gets calculated and displayed in a logical way
+
+\item Testcases (see TES 1.4)
+\item Capture the output (see TES 1.4)
+\item Evaluate the output data
+\begin{itemize}
+\item graph collective output:
+\begin{itemize}
+\item successful if score appears to be a function of height; must have height of 0 to score of 0 mapping
+\item failure otherwise
+\end{itemize}
+\item visual evaluation: success if nothing seems wrong with respect to the goals
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\subsection{TES 6.2 Score Notification: (see Leaderboards)}
+\subsection{TES 6.3 Posting Scores}
+\begin{itemize}
+\item Goal: Show that the game can successfully post scores as a facebook feed update
+
+\item Testcases
+\begin{itemize}
+\item Unit testing: simulate game over state and randomly generate dummy scores, pass to simulated fb scores API
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item capture score stored in dummy fb
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item successful if the generated dummy score matches the captured output
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\end{itemize}
+\end{itemize}
+
+\subsection{TES 6.4 Exporting Scores}
+\begin{itemize}
+\item Goal: Show that the game is able to stores the final score of any game at the database 
+
+\item Testcases
+\begin{itemize}
+\item Unit testing: simulate game over state and randomly generate dummy scores, pass to simulated backend using official client-server implementation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item capture score history with backend dummy
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item compare inputted dummy score with most recent score capture at dummy backend
+\begin{itemize}
+\item success if the scores are the same
+\end{itemize}
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with respect to the goal
+\end{itemize}
+\end{itemize}
+
+
 
 \section{TSS-07 for Leaderboards}
 \begin{itemize}
