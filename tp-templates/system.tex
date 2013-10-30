@@ -1013,11 +1013,267 @@ reflect as being owned in the Store.
 \item Generate report 
 \end{itemize}
 
+\section{TSS-15 for Facebook Features}
+\begin{itemize}
+\item Goal: Determine that the Facebook features work robustly and accurately.
+\item Resources Required: User (tester), iPhone, Android Phone, Computer, 
+Server, Facebook accounts, Internet connection, Time. 
+\item Structure of the Test Plan (Applicable TES list): 
 
-\section{Frontend (what the user sees)}
-\subsection{Transitions}
-\subsection{Pages}
-\subsection{Gameview}
-\subsubsection{Scrolling (In-Game)}
-\section{Backend - Admin}
-\section{Backend - Game}
+\begin{itemize}
+\item Login: SEC-01, MENU-04, PER-07
+\item Logout: MENU-04, SET-04, PER-07
+\item Data access: SOC-02, ENV-11, PER-07
+\item Posting data: SOC-01, SOC-02, PER-07
+\item Invitations: SOC-03, PER-07
+\item Gifting items: SOC-04, PER-07
+\item Payment processing: SEC-02, SET-01, PER-07
+\item Notifications: MENU-04, SOC-05, SOC-06
+\item Data synchronization: SEC-04, MENU-04, SAF-04, ROB-04
+\item Data reset: SET-02
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-15.1: Login}
+\begin{itemize}
+\item Goal: Determine that Facebook login feature works correctly and 
+satisfies performance requirements.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will try logging into 5 valid Facebook accounts 
+on the iOS and Android applications, timing the response.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time 
+\item Record response to login attempt
+\end{itemize}
+\item Evaluate the output
+\begin{itemize}
+\item Check that login was successful
+\item Check that login took under 5 seconds to complete (PER-07)
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.2: Logout}
+\begin{itemize}
+\item Goal: Determine that the Facebook logout feature works correctly.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will try logging out of 5 valid Facebook accounts 
+on the iOS and Android applications, timing the response.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time 
+\item Record response to logout attempt
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that logout was successful
+\item Check that logout took under 5 seconds to complete (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.3: Data Access}
+\begin{itemize}
+\item Goal: Determine that the user can access authorized data.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will attempt to retrieve the following data, 
+authenticated as 5 valid Facebook accounts on each platform, 
+timing the responses.
+\begin{itemize}
+\item Personal scores
+\item Global leaderboards
+\item Friend-only leaderboards
+\item Coins
+\item Items
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time 
+\item Record response to data retrieval attempts
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the data retrievals were successful
+\item Check that data retrievals took under 5 seconds to complete (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.4: Posting Data}
+\item Goal: Determine that the user can post authorized data.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will attempt to post the following data, 
+authenticated as 5 valid Facebook accounts on each platform, 
+timing the responses.
+\begin{itemize}
+\item Personal scores
+\item Personal messages
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time 
+\item Record response to data retrieval attempts
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the posts were successful
+\item Check that posts took under 5 seconds to complete (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.5: Invitations}
+\item Goal: Determine that the user can invite friends and properly get 
+rewarded for invitations.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will attempt to invite several friends, 
+authenticated as 5 valid Facebook accounts on each platform, 
+timing the responses and checking the difference in coins possessed.
+\item Log in manually as invited friends to make sure invites were received.
+\item Manually accept those invites, checking the difference in coins 
+possessed by the inviting accounts.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time 
+\item Calculate coins aquired through invitations
+\item View Facebook profiles of invited accounts
+\item Calculate coins aquired through accepted invitations
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that invites were received
+\item Check that the proper amounts of coins were received
+\item Check that response took under 5 seconds to receive (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.6: Gifting Items}
+\item Goal: Determine that the user can gift items to friends and that the
+gift cooldown works properly.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will first attempt to gift an item to a friend, 
+from 5 valid Facebook accounts to 5 other valid accounts on each platform, 
+timing the local responses.
+\item The code will then run the same test 10 minutes later to check the 
+cooldown function.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time for local response
+\item Record local response to gift sending attempts
+\item Record what happens on the receiver end
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the gift sending was successful the first time
+\item Check that the gift sending was unsuccessful the second time
+\item Check that local response took under 5 seconds to receive (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.7: Payment Processing}
+\item Goal: Determine that the user can make purchases properly, but only 
+when authenticated via Facebook.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that will first attempt to make several purchases, 
+from 5 valid Facebook accounts on each platform, timing the responses.
+\item The code will then run then log out the users and attempt the same 
+purchases, timing the responses.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Measure elapsed time for response
+\item Record response to logged in purchase attempts
+\item Record response to logged out purchase attempts
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the purchase attempts were successful the first time
+\item Check that the purchase attempts were unsuccessful the second time
+\item Check that response took under 5 seconds to receive (PER-07) 
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.8: Notifications}
+\item Goal: Determine that the user properly receives notifications when 
+they are enabled and does not receive them when they are disabled.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code that creates the following scenarios, recording 
+what happens when the notification regarding these events should appear. 
+The code is run twice, first with notifications enabled and then with 
+notifications disabled.
+\begin{itemize}
+\item User scores higher than a friend\textquoteright{}s high score
+\item Friend sends gift to user
+\item Friend beats user\textquoteright{}s high score
+\end{itemize}
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Record what happens when the notifications should appear
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the notifications properly appeared when enabled
+\item Check that the notifications did not appear when disabled
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.9: Data Synchronization}
+\item Goal: Determine that data synchronization works properly across 
+all platforms.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code on each platform, on a different Facebook account 
+per platform, to try to synchronize data with the server and see if the 
+data is replicated to the other devices.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Record what happens when synchronization is attempted
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the data is properly synchronized with the server
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-15.10: Data Reset}
+\item Goal: Determine that resetting data works properly on all platforms.
+\item Testcases: 
+\begin{itemize}
+\item Write and run code on each platform, on a different Facebook account 
+per platform, to try to reset the game data for the Facebook account.
+\item Write and run code on each platform, not logged into Facebook, to 
+try to reset local game data.
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Record what happens when data resetting is attempted
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that the data is properly reset account-wide
+\item Check that the data is properly reset locally
+\end{itemize}
+\item Generate report 
+\end{itemize}
