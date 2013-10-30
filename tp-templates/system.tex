@@ -340,7 +340,7 @@ end.
 \end{itemize}
 \end{itemize}
 
-\section{TSS-03 for Menus{[}b{]} }
+\section{TSS-03 for Menus}
 \begin{itemize}
 \item Goal: Determine that the menus function according to the requirements.
 (Note: The Store menus will be covered in the Store TSS.)
@@ -360,14 +360,14 @@ end.
 \item Menu features are present and work correctly 
 
 \begin{itemize}
-\item The Main Menu should feature many options: FUN-09 
-\item The Settings Menu should allow users to change options: FUN-17 
+\item The Main Menu should feature many options: MENU-02
+\item The Settings Menu should allow users to change options: MENU-04
 \item The start screen will give the option of connecting to Facebook before
-going to the Main Menu: FUN-33 
-\item The user can logout of Facebook from the Settings Menu: FUN-36 
+going to the Main Menu: MENU-05
+\item The user can logout of Facebook from the Settings Menu: SET-04
 \item Pressing the pause button will bring up a menu that allows the user
-to perform a few actions: FUN-39 
-\item Buttons in menus should always perform desired functionality: ROB-08 
+to perform a few actions: GAME-09
+\item Buttons in menus should always perform desired functionality: ROB-02
 \end{itemize}
 \item The menu will have fast response time: PER-04
 \end{itemize}
@@ -406,7 +406,7 @@ and perform the required functions across all platforms.
 \label{menu}
 \begin{itemize}
 \item Goal: Show that the menu feature response times satisfy the performance
-requirements stated in PER-04. 
+requirements. 
 \item Test cases: 
 
 \begin{itemize}
@@ -421,14 +421,57 @@ requirements stated in PER-04.
 
 \begin{itemize}
 \item All menu features should have a response time of under 0.25 seconds
-(PER-04 as of 10/18/13) 
 \end{itemize}
-\item Generate report \end{itemize}
+\item Generate report 
+\end{itemize}
 
 \section{placeholder4}
 \section{placeholder5}
 \section{placeholder6}
-\section{placeholder7}
+
+\section{TSS-07 for Leaderboards}
+\begin{itemize}
+\item Goal: Determine that leaderboard features work as required.
+
+\item Resources Required: 
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+
+\item Structure of the Test Plan: 
+\begin{itemize}
+\item Viewing Leaderboards: ENV-11, partially covered in \ref{subsec:accessdata}
+\item Social Notifications \ref{subsec:notifications}
+\item Responsiveness \ref{menu}
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-7.1: Viewing Leaderboards}
+\begin{itemize}
+\item Goal: Determine that the leaderboard data can be viewed properly. (data 
+access and retrieval covered in \ref{subsec:accessdata})
+\item Testcases: 
+\begin{itemize}
+\item Tester manually toggles between global and friend-only leaderboards
+\item Tester manually scrolls through the leaderboards
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Observe the effects of toggling and scrolling
+\item Observe the outputted data
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that toggling and scrolling work
+\item Check that data appears correctly
+\end{itemize}
+\item Generate report 
+\end{itemize}
 
 \section{TSS-08 for Settings}
 \begin{itemize}
@@ -446,12 +489,56 @@ requirements stated in PER-04.
 
 \item Structure of the Test Plan: 
 \begin{itemize}
-\item Sound
+\item Sound effects: MENU-04, ENV-05
+\item Background music: MENU-04, ENV-05
 \item Sync purchases \ref{subsec:sync}
 \item Reset progress  \ref{subsec:reset}
 \item Notifications  \ref{subsec:notifications}
 \item Facebook log out  \ref{subsec:logout}
+\item Responsiveness \ref{menu}
 \end{itemize}
+\end{itemize}
+
+\subsection{TES-8.1: Sound Effects}
+\begin{itemize}
+\item Goal: Determine that sound effects can be turned on or off using the 
+toggle control in the Settings menu.
+\item Testcases: 
+\begin{itemize}
+\item Tester manually toggles the sound effect option on and starts the game
+\item Tester manually toggles the sound effect option off and starts the game
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Observe the sound output during gameplay and menu navigation
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that sound effects are audible when sound effect option is on
+\item Check that sound effects are inaudible when sound effect option is off
+\end{itemize}
+\item Generate report 
+\end{itemize}
+
+\subsection{TES-8.2: Background Music}
+\begin{itemize}
+\item Goal: Determine that background music can be turned on or off using the 
+toggle control in the Settings menu.
+\item Testcases: 
+\begin{itemize}
+\item Tester manually toggles the background music option on and starts the game
+\item Tester manually toggles the background music option off and starts the game
+\end{itemize}
+\item Capture the output 
+\begin{itemize}
+\item Observe the sound output during gameplay and menu navigation
+\end{itemize}
+\item Evaluate the output 
+\begin{itemize}
+\item Check that background music is audible when background music option is on
+\item Check that background music is inaudible when background music option is off
+\end{itemize}
+\item Generate report 
 \end{itemize}
 
 \section{TSS-09 for Main Menu}
@@ -1108,6 +1195,7 @@ on the iOS and Android applications, timing the response.
 \end{itemize}
 
 \subsection{TES-15.3: Data Access}
+\label{subsec:accessdata}
 \begin{itemize}
 \item Goal: Determine that the user can access authorized data.
 \item Testcases: 
