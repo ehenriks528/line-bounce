@@ -424,14 +424,35 @@ requirements stated in PER-04.
 (PER-04 as of 10/18/13) 
 \end{itemize}
 \item Generate report \end{itemize}
-\section{Frontend (what the user sees)}
-\subsection{Transitions}
-\subsection{Pages}
-\subsection{Gameview}
-\subsubsection{Scrolling (In-Game)}
-\section{Backend - Admin}
-\section{Backend - Game}
 
+\section{placeholder4}
+\section{placeholder5}
+\section{placeholder6}
+\section{placeholder7}
+
+\section{TSS-08 for Settings}
+\begin{itemize}
+\item Goal: Determine that settings features work as required.
+
+\item Resources Required: 
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\end{itemize}
+
+\item Structure of the Test Plan: 
+\begin{itemize}
+\item Sound
+\item Sync purchases \ref{subsec:sync}
+\item Reset progress  \ref{subsec:reset}
+\item Notifications  \ref{subsec:notifications}
+\item Facebook log out  \ref{subsec:logout}
+\end{itemize}
+\end{itemize}
 
 \section{TSS-09 for Main Menu}
 \begin{itemize}
@@ -1016,8 +1037,16 @@ reflect as being owned in the Store.
 \section{TSS-15 for Facebook Features}
 \begin{itemize}
 \item Goal: Determine that the Facebook features work robustly and accurately.
-\item Resources Required: User (tester), iPhone, Android Phone, Computer, 
-Server, Facebook accounts, Internet connection, Time. 
+\item Resources Required:
+\begin{itemize}
+\item User Hours 
+\item iPhone 
+\item Android Phone 
+\item Computer 
+\item Internet Connection 
+\item Server
+\item Facebook accounts
+\end{itemize} 
 \item Structure of the Test Plan (Applicable TES list): 
 
 \begin{itemize}
@@ -1051,12 +1080,13 @@ on the iOS and Android applications, timing the response.
 \item Evaluate the output
 \begin{itemize}
 \item Check that login was successful
-\item Check that login took under 5 seconds to complete (PER-07)
+\item Check that login took under 5 seconds to complete
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.2: Logout}
+\label{subsec:logout}
 \begin{itemize}
 \item Goal: Determine that the Facebook logout feature works correctly.
 \item Testcases: 
@@ -1072,7 +1102,7 @@ on the iOS and Android applications, timing the response.
 \item Evaluate the output 
 \begin{itemize}
 \item Check that logout was successful
-\item Check that logout took under 5 seconds to complete (PER-07) 
+\item Check that logout took under 5 seconds to complete
 \end{itemize}
 \item Generate report 
 \end{itemize}
@@ -1101,12 +1131,13 @@ timing the responses.
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the data retrievals were successful
-\item Check that data retrievals took under 5 seconds to complete (PER-07) 
+\item Check that data retrievals took under 5 seconds to complete
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.4: Posting Data}
+\begin{itemize}
 \item Goal: Determine that the user can post authorized data.
 \item Testcases: 
 \begin{itemize}
@@ -1126,12 +1157,13 @@ timing the responses.
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the posts were successful
-\item Check that posts took under 5 seconds to complete (PER-07) 
+\item Check that posts took under 5 seconds to complete
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.5: Invitations}
+\begin{itemize}
 \item Goal: Determine that the user can invite friends and properly get 
 rewarded for invitations.
 \item Testcases: 
@@ -1154,12 +1186,13 @@ possessed by the inviting accounts.
 \begin{itemize}
 \item Check that invites were received
 \item Check that the proper amounts of coins were received
-\item Check that response took under 5 seconds to receive (PER-07) 
+\item Check that response took under 5 seconds to receive
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.6: Gifting Items}
+\begin{itemize}
 \item Goal: Determine that the user can gift items to friends and that the
 gift cooldown works properly.
 \item Testcases: 
@@ -1180,12 +1213,13 @@ cooldown function.
 \begin{itemize}
 \item Check that the gift sending was successful the first time
 \item Check that the gift sending was unsuccessful the second time
-\item Check that local response took under 5 seconds to receive (PER-07) 
+\item Check that local response took under 5 seconds to receive
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.7: Payment Processing}
+\begin{itemize}
 \item Goal: Determine that the user can make purchases properly, but only 
 when authenticated via Facebook.
 \item Testcases: 
@@ -1205,12 +1239,14 @@ purchases, timing the responses.
 \begin{itemize}
 \item Check that the purchase attempts were successful the first time
 \item Check that the purchase attempts were unsuccessful the second time
-\item Check that response took under 5 seconds to receive (PER-07) 
+\item Check that response took under 5 seconds to receive
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 \subsection{TES-15.8: Notifications}
+\label{subsec:notifications}
+\begin{itemize}
 \item Goal: Determine that the user properly receives notifications when 
 they are enabled and does not receive them when they are disabled.
 \item Testcases: 
@@ -1238,6 +1274,8 @@ notifications disabled.
 \end{itemize}
 
 \subsection{TES-15.9: Data Synchronization}
+\label{subsec:sync}
+\begin{itemize}
 \item Goal: Determine that data synchronization works properly across 
 all platforms.
 \item Testcases: 
@@ -1258,6 +1296,8 @@ data is replicated to the other devices.
 \end{itemize}
 
 \subsection{TES-15.10: Data Reset}
+\label{subsec:reset}
+\begin{itemize}
 \item Goal: Determine that resetting data works properly on all platforms.
 \item Testcases: 
 \begin{itemize}
