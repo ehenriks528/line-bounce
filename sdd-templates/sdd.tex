@@ -11,6 +11,7 @@
 
 \documentclass[12pt,a4paper]{report}
 
+
 % Use packages
 \usepackage{stys/kiss}
 \usepackage{verbatim}
@@ -26,7 +27,7 @@
 
 % Specify document wide settings/parameters
 \setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1.5ex plus 0.5ex minus 0.2ex}
 
@@ -37,7 +38,7 @@
 
 % Document revision/release number
 \def \revision  {1.0}
-\def \vdate {October 29 2013}
+\def \vdate {November 13 2013}
 
 
 \addtolength{\oddsidemargin}{-.2in}
@@ -63,7 +64,7 @@
 
 \Large\rmfamily{Department of \\ Computer Science} \\
 \vspace*{35mm}
-\huge\sffamily{Software Requirements Specification}\\
+\huge\sffamily{Sofware Design Document}\\
 \vspace*{5mm}
 \large\sffamily{for}\\
 \vspace*{5mm}
@@ -75,9 +76,9 @@
 \vspace*{55mm}
 \begin{quotation}
 	\noindent
-	This document provides a detailed overview of the proposed system, outlining the
-requirements and constraints for the game Line Bounce. This document represents an agreement 
-by the developers to deliver any and all essential requirements.\\
+	This document contains a detailed description of how the proposed system will
+work. It describes the architecture used, the technology used and models of the
+system’s design.\\
 \end{quotation}
 
 \end{center}
@@ -97,9 +98,6 @@ by the developers to deliver any and all essential requirements.\\
 % ========================
 % Table of contents, list of figures
 % ========================      
-\makeatletter
-\renewcommand{\l@subsection}{\@dottedtocline{2}{3.8em}{5em}}
-\makeatother
 \tableofcontents                   
 \listoffigures                   
 \newpage
@@ -111,8 +109,15 @@ by the developers to deliver any and all essential requirements.\\
 % Start of main body of the document
 % ============================
 \input{introduction}
-\input{functional_requirements}
-\input{nonfunctional_requirements}
+\input{system_design_overview}
+\input{architecture_model}
+\input{user_interface}
+\input{use_cases}
+\input{sequence_diagrams}
+\input{database}
+\input{frontend}
+\input{backend}
+\input{security}
 
 % ============================
 % Start of appendices

@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_MOD_BY	Bostjan Mihoric	/ccompletion@gmail.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	/unofficial modification/
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	/unofficial modification/
+Acknowledgments	inside_cover.tex	41;"	subsubsection
+Application Security	security.tex	1;"	chapter
+Architecture Model	architecture_model.tex	1;"	chapter
+Backend Design	backend.tex	1;"	chapter
+Copyright notice	inside_cover.tex	6;"	subsubsection
+Credits	inside_cover.tex	36;"	subsubsection
+Database Specification	database.tex	1;"	chapter
+Frontend Design	frontend.tex	1;"	chapter
+Glossary	glossary.tex	2;"	chapter
+Introduction	introduction.tex	5;"	chapter
+Sequence Diagrams	sequence_diagrams.tex	1;"	chapter
+System Design Overview	system_design_overview.tex	1;"	chapter
+Use Case Analysis	use_cases.tex	1;"	chapter
+User Interface Specification	user_interface.tex	1;"	chapter
