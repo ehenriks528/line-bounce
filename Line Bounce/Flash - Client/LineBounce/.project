@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>LineBounce</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] Box2DFlash-src</name>
+			<type>2</type>
+			<location>C:/Users/Dylan Sullivan/Documents/Flash Libraries/Box2DFlash-src</location>
+		</link>
+		<link>
+			<name>[source path] Hi-ReS-Stats</name>
+			<type>2</type>
+			<location>C:/Users/Dylan Sullivan/Documents/Flash Libraries/Hi-ReS-Stats</location>
+		</link>
+		<link>
+			<name>[source path] starling-src</name>
+			<type>2</type>
+			<location>C:/Users/Dylan Sullivan/Documents/Flash Libraries/starling-src</location>
+		</link>
+	</linkedResources>
+</projectDescription>
