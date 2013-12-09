@@ -2,8 +2,6 @@ package
 {
 	import flash.display.Sprite;
 	
-	import flashx.textLayout.formats.BackgroundColor;
-	
 	import net.hires.debug.Stats; 
 	
 	import starling.core.Starling;

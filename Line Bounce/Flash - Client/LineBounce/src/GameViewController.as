@@ -1,7 +1,9 @@
 package
 {	
 	
-	import gameViews.Test01GameView;
+	import gameViews.Leaderboards;
+	import gameViews.MainMenu;
+	import gameViews.Shop;
 	
 	import org.as3commons.collections.ArrayList;
 	import org.as3commons.collections.framework.IOrderedListIterator;
@@ -12,7 +14,11 @@ package
 	{
 		private static var instance:GameViewController;
 		private static var currentGameViews:ArrayList;
-		public static var test01GameView:GameView;
+		
+		public static var mainMenuGameView:GameView;
+		public static var shopGameView:GameView;
+		public static var leaderboardsGameView:GameView;
+	
 		
 		public function GameViewController()
 		{
@@ -54,12 +60,24 @@ package
 		public static function getGameView(viewName:String):GameView
 		{
 			switch(viewName){
-				case "Test01":
-					if(test01GameView == null)
-						test01GameView = new Test01GameView();
-					instance.addChild(test01GameView as Sprite);
-					trace("GameViewController:getGameView; Returning test01GameView");
-					return test01GameView as GameView;
+				case "MainMenu":
+					if(mainMenuGameView == null) {
+						mainMenuGameView = new MainMenu();
+						instance.addChild(mainMenuGameView as Sprite);
+					}
+					return mainMenuGameView as GameView 
+				case "Shop":
+					if(shopGameView == null){
+						shopGameView = new Shop();
+						instance.addChild(shopGameView as Sprite);
+					}
+					return shopGameView as GameView;
+				case "Leaderboards":
+					if(leaderboardsGameView == null) {
+						leaderboardsGameView = new Leaderboards();
+						instance.addChild(leaderboardsGameView as Sprite);
+					}
+					return leaderboardsGameView as GameView;
 			}
 			trace("GameViewController:getGameView; Returning null");
 			return null;
