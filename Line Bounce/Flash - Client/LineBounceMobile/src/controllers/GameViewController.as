@@ -1,4 +1,4 @@
-package
+package controllers
 {	
 	
 	import gameViews.Test01GameView;

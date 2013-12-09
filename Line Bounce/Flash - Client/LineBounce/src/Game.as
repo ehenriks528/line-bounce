@@ -4,6 +4,7 @@ package
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import controllers.GameViewController;
 	
 	public class Game extends Sprite
 	{
@@ -40,6 +41,16 @@ package
 					trace("Game:testKeyDown; Case 2 begin");
 					GameViewController.exitGameView(GameViewController.getGameView("Test01"));
 					trace("Game:testKeyDown; Case 2 complete");
+					break;
+				case "3":
+					trace("Game:testKeyDown; Case 3 begin");
+					GameViewController.enterGameView(GameViewController.getGameView("Play"));
+					trace("Game:testKeyDown; Case 3 complete");
+					break;
+				case "4":
+					trace("Game:testKeyDown; Case 3 begin");
+					GameViewController.exitGameView(GameViewController.getGameView("Play"));
+					trace("Game:testKeyDown; Case 3 complete");
 					break;
 				
 			}
