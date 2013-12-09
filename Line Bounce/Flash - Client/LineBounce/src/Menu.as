@@ -8,12 +8,12 @@ package
 	import states.Leaderboards;
 	import states.Shop;
 	
-	public class Game extends Sprite
+	public class Menu extends Sprite
 	{
 		private var shopMenu:Shop;
 		private var leaderboardState:Leaderboards;
 		
-		public function Game()
+		public function Menu()
 		{
 			super();
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);		
