@@ -11,6 +11,7 @@
     Learn more about Flex at http://flex.org 
     // -->
     <head>
+        <script type=”text/javascript” src='http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js'></script>
         <title>${title}</title>
         <meta name="google" value="notranslate" />         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,13 +28,12 @@
             object:focus { outline:none; }
             #flashContent { display:none; }
         </style>
-        
         <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
         <!-- BEGIN Browser History required section ${useBrowserHistory}>
         <link rel="stylesheet" type="text/css" href="history/history.css" />
         <script type="text/javascript" src="history/history.js"></script>
         <!${useBrowserHistory} END Browser History required section -->  
-            
+        
         <script type="text/javascript" src="swfobject.js"></script>
         <script type="text/javascript">
             // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
@@ -51,16 +51,36 @@
             attributes.id = "${application}";
             attributes.name = "${application}";
             attributes.align = "middle";
-            swfobject.embedSWF(
-                "${swf}.swf", "flashContent", 
-                "${width}", "${height}", 
-                swfVersionStr, xiSwfUrlStr, 
-                flashvars, params, attributes);
+            swfobject.embedSWF("${swf}.swf", "flashContent", "${width}", "${height}", swfVersionStr, xiSwfUrlStr, flashvars, params, attributes);
             // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
             swfobject.createCSS("#flashContent", "display:block;text-align:left;");
         </script>
     </head>
     <body>
+
+		<div id="fb-root"></div>
+		<script>
+		  window.fbAsyncInit = function() {
+		    // init the FB JS SDK
+		    FB.init({
+		      appId      : '164181750458934',                        // App ID from the app dashboard
+		      status     : true,                                 // Check Facebook Login status
+		      xfbml      : true                                  // Look for social plugins on the page
+		    });
+		
+		    // Additional initialization code such as adding Event Listeners goes here
+		  };
+		
+		  // Load the SDK asynchronously
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "http://connect.facebook.net/en_US/all/debug.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+
         <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
              JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
              when JavaScript is disabled.
@@ -76,7 +96,6 @@
                                 + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
             </script> 
         </div>
-        
         <noscript>
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="${width}" height="${height}" id="${application}">
                 <param name="movie" value="${swf}.swf" />
@@ -104,6 +123,6 @@
                 </object>
                 <!--<![endif]-->
             </object>
-        </noscript>     
+        </noscript>   
    </body>
 </html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>LineBounce</name>
+	<name>LineBounceMobile</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,8 +10,16 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.apollobuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>com.adobe.flexide.project.multiplatform.multiplatformasnature</nature>
+		<nature>com.adobe.flexide.project.multiplatform.multiplatformnature</nature>
+		<nature>com.adobe.flexbuilder.project.apollonature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
 	<linkedResources>
@@ -19,11 +27,6 @@
 			<name>[source path] Box2DFlash-src</name>
 			<type>2</type>
 			<location>C:/Users/Dylan Sullivan/Documents/Flash Libraries/Box2DFlash-src</location>
-		</link>
-		<link>
-			<name>[source path] GraphAPI_Web_1_8_1-src</name>
-			<type>2</type>
-			<location>C:/Users/Dylan Sullivan/Documents/Flash Libraries/GraphAPI_Web_1_8_1-src</location>
 		</link>
 		<link>
 			<name>[source path] Hi-ReS-Stats</name>
