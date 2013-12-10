@@ -5,33 +5,33 @@
 
 \item Structure of the Test Plan (Applicable TES list):
 \begin{itemize}
-\item game start movement (GAME-01)
-\item pausing (GAME-09)
+\item Game start movement (GAME-01)
+\item Pausing (GAME-09)
 
-\item bouncing behavior
+\item Bouncing behavior
 \begin{itemize}
-\item top of lines, velocity change (GAME-02)
-\item bottom of lines, velocity change (GAME-05)
-\item bouncing off walls, velocity change (GAME-06)
-\item platform size affecting velocity (GAME-12)
+\item Top of lines, velocity change (GAME-02)
+\item Bottom of lines, velocity change (GAME-05)
+\item Bouncing off walls, velocity change (GAME-06)
+\item Platform size affecting velocity (GAME-12)
 \end{itemize}
 
-\item off-screen movement
+\item Off-screen movement
 \begin{itemize}
-\item falling off (bottom of) screen (GAME-03)
-\item moving up (top of) screen (GAME-04)
+\item Falling off (bottom of) screen (GAME-03)
+\item Moving up (top of) screen (GAME-04)
 \end{itemize}
 
-\item collisions
+\item Collisions
 \begin{itemize}
-\item power-up collection, activation, -doesn\textquoteright{}t affect movement- (GAME-08)
-\item touching enemies falling off screen ending game (GAME-03)
+\item Power-up collection, activation, -doesn\textquoteright{}t affect movement- (GAME-08)
+\item Touching enemies falling off screen ending game (GAME-03)
 \end{itemize}
 
-\item movement affecting score (GAME-18)
+\item Movement affecting score (GAME-18)
 \end{itemize}
 
-\item Resources needed:
+\item Resources Required:
 \begin{itemize}
 \item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
 \item Timing software
@@ -44,13 +44,13 @@
 \begin{itemize}
 \item Goal: Show that the avatar, at the start of a game, will start at the top center of the user\textquoteright{}s screen and accelerate in the -y direction only
 \begin{itemize}
-\item start location determined by screen resolution - calculate beforehand
-\item velocity acceleration should be determined globally (or change with powerup)
+\item Start location determined by screen resolution - calculate beforehand
+\item Velocity acceleration should be determined globally (or change with power-up)
 \end{itemize}
 
 \item Testcases
 \begin{itemize}
-\item Unit testing on game start: avatar skin, powerup permutations
+\item Unit testing on game start: avatar skin, power-up permutations
 \item Human confirmation
 \end{itemize}
 
@@ -62,13 +62,13 @@
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare control variables to to captured data:
+\item Compare control variables to to captured data:
 \begin{itemize}
-\item success = they match and avatar has correct start location and velocity/acceleration
-\item failure otherwise
+\item Success = they match and avatar has correct start location and velocity/acceleration
+\item Failure otherwise
 \end{itemize}
 
-\item visual evaluation: success if nothing seems wrong with respect to the goals
+\item Visual evaluation: success if nothing seems wrong with respect to the goals
 \end{itemize}
 
 \item Generate report
@@ -82,30 +82,30 @@
 \begin{itemize}
 \item Goal: Show that, while in a pause state, all moving objects halt in place, but exiting the pause state will restore original movement
 \begin{itemize}
-\item resumes gameplay in a coherent fashion that will not break the user\textquoteright{}s immersion in the game
-\item objects originally moving in a certain trajectory will not suddenly change trajectory for no reason (see TES-1.3)
+\item Resumes gameplay in a coherent fashion that will not break the user\textquoteright{}s immersion in the game
+\item Objects originally moving in a certain trajectory will not suddenly change trajectory for no reason (see TES-1.3)
 \item Game state will be saved (see TES 2.1)
 \end{itemize}
 
 \item Testcases:
 \begin{itemize}
-\item unit testing on state transition: active to paused to active again
+\item Unit testing on state transition: active to paused to active again
 \begin{itemize}
-\item simulate pause/resume button pressed events
+\item Simulate pause/resume button pressed events
 \end{itemize}
 \end{itemize}
 
 \item Capture the output
 \begin{itemize}
-\item measure all states involved
+\item Measure all states involved
 \end{itemize}
 
 \item Evaluate the results
 \begin{itemize}
-\item compare the two active states, check pause state
+\item Compare the two active states, check pause state
 \begin{itemize}
-\item successful if the two states are exactly the same; pause state should be different and contain no movement
-\item failure otherwise
+\item Successful if the two states are exactly the same; pause state should be different and contain no movement
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -122,32 +122,32 @@
 \item Goal: Show that the avatar will bounce off of objects in game, that its trajectory changes in a fun and intuitive fashion 
 
 \begin{itemize}
-\item avatar will only change from -y to +y velocity when colliding with the top of drawn lines 
-\item avatar will only change from +y to -y velocity when colliding with the top of drawn lines
-\item side walls (left and right) are \textquotedblleft{}solid\textquotedblright{}: avatar will reverse x velocity upon collision
-\item shorter drawn platforms will give more of a boost than longer drawn ones
+\item Avatar will only change from -y to +y velocity when colliding with the top of drawn lines 
+\item Avatar will only change from +y to -y velocity when colliding with the top of drawn lines
+\item Side walls (left and right) are \textquotedblleft{}solid\textquotedblright{}: avatar will reverse x velocity upon collision
+\item Shorter drawn platforms will give more of a boost than longer drawn ones
 \end{itemize}
 
 \item Testcases: 
 \begin{itemize}
-\item unit testing on avatar-line collisions: top of line and avatar collision, bottom of line and avatar collision, avatar 
-\item unit testing on avatar wall collision 
-\item both unit tests should have different combinations of avatars, powerups permutations, input speeds, input angles
+\item Unit testing on avatar-line collisions: top of line and avatar collision, bottom of line and avatar collision, avatar 
+\item Unit testing on avatar wall collision 
+\item Both unit tests should have different combinations of avatars, power-ups permutations, input speeds, input angles
 \item Human confirmation 
 \end{itemize}
 
 \item Capture the output 
 \begin{itemize}
-\item measure trajectories, avatar state, powerup state, and line state before/after each collision 
-\item visual capture 
+\item Measure trajectories, avatar state, power-up state, and line state before/after each collision 
+\item Visual capture 
 \end{itemize}
 
 \item Evaluate the results
 \begin{itemize}
-\item compare captured data with expected data (based off input)
+\item Compare captured data with expected data (based off input)
 \begin{itemize}
-\item successful if trajectories are reflected, but everything else should match
-\item failure otherwise
+\item Successful if trajectories are reflected, but everything else should match
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 \item Generate report 
@@ -177,12 +177,12 @@
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare game state with respect to vertical location
+\item Compare game state with respect to vertical location
 \begin{itemize}
-\item success = high vertical location always maintain active game play state; threshold low vertical location triggers game over state
-\item failure otherwise
+\item Success = high vertical location always maintain active game play state; threshold low vertical location triggers game over state
+\item Failure otherwise
 \end{itemize}
-\item visual evaluation: success if nothing seems wrong with respect to the goals
+\item Visual evaluation: success if nothing seems wrong with respect to the goals
 \end{itemize}
 
 \item Generate report
@@ -207,21 +207,21 @@
 
 \item Capture the output
 \begin{itemize}
-\item measure trajectories, avatar state, powerup state, and line state before/after each collision
-\item visual capture
+\item Measure trajectories, avatar state, power-up state, and line state before/after each collision
+\item Visual capture
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare captured data with expected data (based off input)
+\item Compare captured data with expected data (based off input)
 \begin{itemize}
-\item successful if reflected trajectories, but everything else should match
-\item failure otherwise
+\item Successful if reflected trajectories, but everything else should match
+\item Failure otherwise
 \end{itemize}
-\item compare before/after avatar state (trajectory), enemy state
+\item Compare before/after avatar state (trajectory), enemy state
 \begin{itemize}
-\item successful if before avatar y-component is lower than enemy's; after game state is game over OR before avatar y-component is greater than enemy's; after game state is active, avatar trajectory is reflected, enemy is dead
-\item failure otherwise
+\item Successful if before avatar y-component is lower than enemy's; after game state is game over OR before avatar y-component is greater than enemy's; after game state is active, avatar trajectory is reflected, enemy is dead
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -247,15 +247,15 @@
 \begin{itemize}
 \item Measure “height” and score before and after increase
 \begin{itemize}
-\item calculate difference
+\item Calculate difference
 \end{itemize}
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare game state with respect to vertical location
+\item Compare game state with respect to vertical location
 \begin{itemize}
-\item success = positive difference
+\item Success = positive difference
 \end{itemize}
 \end{itemize}
 
@@ -527,19 +527,19 @@ requirements.
 \begin{itemize}
 \item Accessibility
 \begin{itemize}
-\item facebook authentication (SET-01)
-\item fast response time (PER-07)
+\item Facebook authentication (SET-01)
+\item Fast response time (PER-07)
 \end{itemize}
 
 \item Product Display/Transaction
 \begin{itemize}
-\item store will have many items (MENU-03)
-\item store will categorize items (ENV-10)
-\item history will be stored on secure database center (SEC-03)
+\item Store will have many items (MENU-03)
+\item Store will categorize items (ENV-10)
+\item History will be stored on secure database center (SEC-03)
 \end{itemize}
 \end{itemize}
 
-\item Resources needed:
+\item Resources Required:
 \begin{itemize}
 \item User(tester)
 \item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
@@ -562,17 +562,17 @@ requirements.
 \item Capture the output
 \begin{itemize}
 \item Measure store state and reaction time
-\item visual confirmation
+\item Visual confirmation
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare store state with respect to login state
+\item Compare store state with respect to login state
 \begin{itemize}
-\item successful if user logged in maps to open store; user logged out maps to closed store; total time doesn’t exceed 5 seconds
-\item failure otherwise
+\item Successful if user logged in maps to open store; user logged out maps to closed store; total time doesn’t exceed 5 seconds
+\item Failure otherwise
 \end{itemize}
-\item human confirmation - success if nothing seems out of the ordinary
+\item Human confirmation - success if nothing seems out of the ordinary
 \end{itemize}
 
 \item Generate report
@@ -592,27 +592,27 @@ requirements.
 \item Unit testing on store login state: (see TES 4.1)
 \item Unit testing on experience level: randomly generate positive numbers to simulate user level
 \begin{itemize}
-\item simulate purchase, do for each item category
+\item Simulate purchase, do for each item category
 \end{itemize}
 \item Human confirmation
 \end{itemize}
 
 \item Capture the output
 \begin{itemize}
-\item capture store state/prompts, purchasable product list, currency state
-\item visual confirmation
+\item Capture store state/prompts, purchasable product list, currency state
+\item Visual confirmation
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare purchasable product lists across inputs
+\item Compare purchasable product lists across inputs
 \begin{itemize}
-\item success(a): lists for lower levels should be contained by higher level lists
+\item Success(a): lists for lower levels should be contained by higher level lists
 \end{itemize}
-\item compare purchasable product list before and after purchase
+\item Compare purchasable product list before and after purchase
 \begin{itemize}
-\item success(b): powerups: before and after lists match, coin decrement, coins: lists match, purchase confirmation, coin increment, fb transaction, wearable item:	 purchased item not in the after list, coin decrement
-\item failure otherwise
+\item Success(b): power-ups: before and after lists match, coin decrement, coins: lists match, purchase confirmation, coin increment, fb transaction, wearable item:	 purchased item not in the after list, coin decrement
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -628,28 +628,28 @@ requirements.
 \begin{itemize}
 \item Goal: Determine that inputted gestures are being interpreted correctly by the game
 \begin{itemize}
-\item preparedness for intended input (swiping)
-\item preparedness for unintended input (tapping, multi-finger drag, etc.)
-\item response timing: is it less than 24-33 ms (PER-05)
+\item Preparedness for intended input (swiping)
+\item Preparedness for unintended input (tapping, multi-finger drag, etc.)
+\item Response timing: is it less than 24-33 ms (PER-05)
 \end{itemize}
 
 \item Structure of the Test Plan (Applicable TES list):
 \begin{itemize}
-\item intended input and response
+\item Intended input and response
 \begin{itemize}
-\item accurate input response (ACC-01)
-\item straight line approximation (ACC-02)
-\item large finger compatibility (ACC-04)
+\item Accurate input response (ACC-01)
+\item Straight line approximation (ACC-02)
+\item Large finger compatibility (ACC-04)
 \end{itemize}
 
-\item unintended input and response
+\item Unintended input and response
 \begin{itemize}
-\item accidental touches (ACC-03)
-\item input from mixed devices
+\item Accidental touches (ACC-03)
+\item Input from mixed devices
 \end{itemize}
 \end{itemize}
 
-\item Resources needed:
+\item Resources Required:
 \begin{itemize}
 \item User(tester)
 \item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
@@ -671,14 +671,14 @@ requirements.
 
 \item Capture the output
 \begin{itemize}
-\item record response time
-\item capture and store resulting line, visually
+\item Record response time
+\item Capture and store resulting line, visually
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item success if response time meets goal
-\item visually compare expected trajectory - if the tester isn’t surprised by resulting line and the line is straight, it’s a success
+\item Success if response time meets goal
+\item Visually compare expected trajectory - if the tester isn’t surprised by resulting line and the line is straight, it’s a success
 \end{itemize}
 
 \item Generate report
@@ -701,15 +701,15 @@ requirements.
 
 \item Capture the output
 \begin{itemize}
-\item capture game state and responses (resulting line/state)
-\item visual confirmation
+\item Capture game state and responses (resulting line/state)
+\item Visual confirmation
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare before and after game state
+\item Compare before and after game state
 \begin{itemize}
-\item success if there is no response/change of state
+\item Success if there is no response/change of state
 \end{itemize}
 \end{itemize}
 
@@ -729,20 +729,20 @@ requirements.
 \begin{itemize}
 \item In-Game Display (GAME-18)
 \begin{itemize}
-\item game start, during gameplay
+\item Game start, during gameplay
 \end{itemize}
 
-\item after death (see leaderboards)
+\item After death (see leaderboards)
 \item Posting Scores (SOC-01)
 
 \item Storing Scores
 \begin{itemize}
-\item high score storage (SEC-03)
-\item archives (SOC-02)
+\item High score storage (SEC-03)
+\item Archives (SOC-02)
 \end{itemize}
 \end{itemize}
 
-\item Resources needed:
+\item Resources Required:
 \begin{itemize}
 \item User(tester)
 \item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
@@ -760,12 +760,12 @@ requirements.
 \item Capture the output (see TES 1.4)
 \item Evaluate the output data
 \begin{itemize}
-\item graph collective output:
+\item Graph collective output:
 \begin{itemize}
-\item successful if score appears to be a function of height; must have height of 0 to score of 0 mapping
-\item failure otherwise
+\item Successful if score appears to be a function of height; must have height of 0 to score of 0 mapping
+\item Failure otherwise
 \end{itemize}
-\item visual evaluation: success if nothing seems wrong with respect to the goals
+\item Visual evaluation: success if nothing seems wrong with respect to the goals
 \end{itemize}
 
 \item Generate report
@@ -787,12 +787,12 @@ requirements.
 
 \item Capture the output
 \begin{itemize}
-\item capture score stored in dummy fb
+\item Capture score stored in dummy fb
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item successful if the generated dummy score matches the captured output
+\item Successful if the generated dummy score matches the captured output
 \end{itemize}
 
 \item Generate report
@@ -812,14 +812,14 @@ requirements.
 
 \item Capture the output
 \begin{itemize}
-\item capture score history with backend dummy
+\item Capture score history with backend dummy
 \end{itemize}
 
 \item Evaluate the output data
 \begin{itemize}
-\item compare inputted dummy score with most recent score capture at dummy backend
+\item Compare inputted dummy score with most recent score capture at dummy backend
 \begin{itemize}
-\item success if the scores are the same
+\item Success if the scores are the same
 \end{itemize}
 \end{itemize}
 
@@ -994,7 +994,7 @@ performance requirements.
 
 \begin{itemize}
 \item \label{select}
-Pressing PLAY takes user to pre-game powerup selection menu.
+Pressing PLAY takes user to pre-game power-up selection menu.
 \item Pressing LEADERBOARDS takes user to the leaderboards screen.
 \item Pressing SHOP takes user to the store.
 \item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
@@ -1017,7 +1017,7 @@ Pressing PLAY takes user to pre-game powerup selection menu.
 \item Evaluate the result: 
 
 \begin{itemize}
-\item Pressing PLAY takes user to pre-game powerup selection menu.
+\item Pressing PLAY takes user to pre-game power-up selection menu.
 \item Pressing LEADERBOARDS takes user to the leaderboards screen.
 \item Pressing SHOP takes user to the store.
 \item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
@@ -1230,9 +1230,9 @@ bounce-to-length ratio.
 
 
 
-\section{TSS-12 for Pregame Powerup Selection}
+\section{TSS-12 for Pregame power-up Selection}
 \begin{itemize}
-\item Goal: Determine that the pregame powerup selection menu works properly and in accordance
+\item Goal: Determine that the pregame power-up selection menu works properly and in accordance
 with performance and accuracy requirements. FUN-35
 for robustness and accuracy.
 
@@ -1249,25 +1249,25 @@ for robustness and accuracy.
 
 \begin{itemize}
 
-\item Powerup Selections work properly. MENU-06
-\item Powerup Selection menu functions quickly and accurately.
+\item Power-up Selections work properly. MENU-06
+\item Power-up Selection menu functions quickly and accurately.
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-12.1: Powerup Selections Work Properly }
-\label{powerups}
+\subsection{TES-12.1: power-up Selections Work Properly }
+\label{power-ups}
 \begin{itemize}
-\item Goal: Show that all functionality related to powerup selections works properly. 
+\item Goal: Show that all functionality related to power-up selections works properly. 
 \item Test cases: 
 
 \begin{itemize}
-\item Test that all powerups the user owns can be selected from the pregame menu, and that selection works properly.
+\item Test that all power-ups the user owns can be selected from the pregame menu, and that selection works properly.
 \begin{itemize}
-\item Tester manually selects all powerups before playthrough from the pregame menu.
-\item Tester manually observes the number of powerups before and after selection.
-\item Tester manually observes whether all powerups selected appear ingame.
+\item Tester manually selects all power-ups before playthrough from the pregame menu.
+\item Tester manually observes the number of power-ups before and after selection.
+\item Tester manually observes whether all power-ups selected appear ingame.
 \end{itemize}
-\item Test that powerup selections menu appears when the PLAY button is pressed from Main Menu.
+\item Test that power-up selections menu appears when the PLAY button is pressed from Main Menu.
 \begin{itemize}
 \item \ref{select}
 \end{itemize}
@@ -1279,16 +1279,16 @@ for robustness and accuracy.
 \item Evaluate the result: 
 
 \begin{itemize}
-\item The count of any powerup selected from the menu should drop by one after it is used.
+\item The count of any power-up selected from the menu should drop by one after it is used.
 \item Any and all items selected from the menu should appear and be active ingame.
-\item All powerups on the menu should be selectable.
+\item All power-ups on the menu should be selectable.
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
-\subsection{TES-12.2: Powerup Selections Work Properly }
+\subsection{TES-12.2: power-up Selections Work Properly }
 \begin{itemize}
-\item Goal: Show that the powerup selections menu functions quickly and accurately. 
+\item Goal: Show that the power-up selections menu functions quickly and accurately. 
 \item Test cases: 
 
 \begin{itemize}
@@ -1358,7 +1358,7 @@ go to the Store, go to the leaderboards or return to the Main Menu. MENU-01
 \begin{itemize}
 \item Result of force-closing the app mid-playthrough and reopening should NOT land the tester at the Game Over menu.
 \item Result of losing the game by contacting enemy or falling through bottom SHOULD direct the tester to Game Over menu.
-\item Starting a new game through the Game Over menu should bring the tester to the Pregame Powerup Selection menu.
+\item Starting a new game through the Game Over menu should bring the tester to the Pregame power-up Selection menu.
 \item Attempting to post the score to leaderboards through the Game Over menu should post the score to leaderboards.
 \item Attempting to go to the store from Game Over menu should direct the tester to the Store.
 \item Attempting to go to the leaderboards from the Game Over Menu should direct the tester to the leaderboards.
@@ -1389,9 +1389,9 @@ go to the Store, go to the leaderboards or return to the Main Menu. MENU-01
 
 
 
-\section{TSS-14 for Powerups}
+\section{TSS-14 for power-ups}
 \begin{itemize}
-\item Goal: Determine that all functionality related to Powerups functions properly and with respect to performance, accuracy, and robustness requirements.
+\item Goal: Determine that all functionality related to power-ups functions properly and with respect to performance, accuracy, and robustness requirements.
 
 for robustness and accuracy.
 
@@ -1408,27 +1408,27 @@ for robustness and accuracy.
 
 \begin{itemize}
 
-\item Powerups selected from the Pregame Powerup Selections Menu appropriately function ingame. MENU-06
-\item Powerups obtained ingame are successfully acquired upon touching the avatar, and activate immediately. GAME-13
-\item Functionality related to sending and receiving Powerups to and from friends works properly. SOC-04
+\item Power-ups selected from the Pregame power-up Selections Menu appropriately function ingame. MENU-06
+\item Power-ups obtained ingame are successfully acquired upon touching the avatar, and activate immediately. GAME-13
+\item Functionality related to sending and receiving power-ups to and from friends works properly. SOC-04
 
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-14.1: Preselected Powerups Function Appropriately }
+\subsection{TES-14.1: Preselected power-ups Function Appropriately }
 \begin{itemize}
-\item Goal: Show that all functionality related to preselected Powerups works properly. 
+\item Goal: Show that all functionality related to preselected power-ups works properly. 
 \item Test cases: 
 
 \begin{itemize}
-\item \ref{powerups}
-\item Tester manually keeps track of all powerups selected from the pregame powerup selection menu, and verifies that all
+\item \ref{power-ups}
+\item Tester manually keeps track of all power-ups selected from the pregame power-up selection menu, and verifies that all
 icons are displayed onscreen during the game.
-\item Tester manually keeps track of all powerups selected from the pregame powerup selection menu, and verifies each one 
+\item Tester manually keeps track of all power-ups selected from the pregame power-up selection menu, and verifies each one 
 activates at the appropriate time during the playthrough.
 \begin{itemize}
-\item Tester Equips a SHIELD powerup before game, and makes contact with an Enemy from the bottom.
-\item Tester Equips an on-death powerup before game, and makes contact with an Enemy from the bottom. Repeats and falls off the bottom.
+\item Tester Equips a SHIELD power-up before game, and makes contact with an Enemy from the bottom.
+\item Tester Equips an on-death power-up before game, and makes contact with an Enemy from the bottom. Repeats and falls off the bottom.
 \item Tester Equips an on-start item before game, and starts a playthrough.
 \end{itemize}
 \end{itemize}
@@ -1439,10 +1439,10 @@ activates at the appropriate time during the playthrough.
 \item Evaluate the result: 
 
 \begin{itemize}
-\item All powerups preselected have their icons appear on the screen, and these icons are removed once the item is used up.
-\item SHIELD powerup lasts around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
-\item On-death powerups from the pregame powerup selections menu activate whenever the avatar is about to die.
-\item On-start powerups from the pregame powerup selections menu activate immediately upon the avatar touching the ground at the start of a game.
+\item All power-ups preselected have their icons appear on the screen, and these icons are removed once the item is used up.
+\item SHIELD power-up lasts around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
+\item On-death power-ups from the pregame power-up selections menu activate whenever the avatar is about to die.
+\item On-start power-ups from the pregame power-up selections menu activate immediately upon the avatar touching the ground at the start of a game.
 
 \end{itemize}
 \item Generate report 
@@ -1450,18 +1450,18 @@ activates at the appropriate time during the playthrough.
 
 
 
-\subsection{TES-14.2: Powerups Acquired Ingame}
+\subsection{TES-14.2: power-ups Acquired Ingame}
 \begin{itemize}
-\item Goal: Show that all functionality related to ingame-acquired powerups functions properly.
+\item Goal: Show that all functionality related to ingame-acquired power-ups functions properly.
 \item Test cases: 
 
 \begin{itemize}
-\item Test code is written to release all powerup types IN-GAME, and the tester manually makes contact between his/her avatar and
-the released powerups.
-\item Tester manually observes the effects of all powerups acquired IN-GAME, and whether they activate at the appropriate time.
+\item Test code is written to release all power-up types IN-GAME, and the tester manually makes contact between his/her avatar and
+the released power-ups.
+\item Tester manually observes the effects of all power-ups acquired IN-GAME, and whether they activate at the appropriate time.
 \begin{itemize}
-\item Tester acquires a SHIELD powerup ingame, and makes contact with an Enemy from the bottom.
-\item Tester acquires an on-death powerup before game, and makes contact with an Enemy from the bottom. Repeats and falls off bottom.
+\item Tester acquires a SHIELD power-up ingame, and makes contact with an Enemy from the bottom.
+\item Tester acquires an on-death power-up before game, and makes contact with an Enemy from the bottom. Repeats and falls off bottom.
 \end{itemize}
 \item Tester manually observes whether an item acquired ingame and stored has an icon appear for it onscreen.
 \end{itemize}
@@ -1472,33 +1472,33 @@ the released powerups.
 \item Evaluate the result: 
 
 \begin{itemize}
-\item Any powerup the avatar touches ingame is immediately acquired, and depending on the type of powerup, stored or activated immediately.
-\item All powerups acquired ingame have their icons appear on the screen, and these icons are removed once the item is used up.
-\item SHIELD powerup should last around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
-\item On-death powerups acquired ingame activate when the avatar is about to die by any lethal means.
-\item Powerups lose their ingame on-screen icons while actively in use.
+\item Any power-up the avatar touches ingame is immediately acquired, and depending on the type of power-up, stored or activated immediately.
+\item All power-ups acquired ingame have their icons appear on the screen, and these icons are removed once the item is used up.
+\item SHIELD power-up should last around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
+\item On-death power-ups acquired ingame activate when the avatar is about to die by any lethal means.
+\item Power-ups lose their ingame on-screen icons while actively in use.
 
 \end{itemize}
 \item Generate report 
 \end{itemize}
 
 
-\subsection{TES-14.3: Sending And Receiving Powerups }
+\subsection{TES-14.3: Sending And Receiving power-ups }
 \begin{itemize}
-\item Goal: Show that all functionality related to sending and receiving powerups to and from other users works properly.
+\item Goal: Show that all functionality related to sending and receiving power-ups to and from other users works properly.
 \item Test cases: 
 
 \begin{itemize}
 
-\item Tester manually enters the leaderboards and presses the arrow next to a friend's name, expected to bring up a powerup selection menu.
-\item Tester manually enters the Send Powerup selection menu, and selects all options for powerups to be sent.
-\item Tester manually attempts to send a powerup to a friend immediately after sending a powerup to the same friend.
-\item Test code is written to alter the user experience level, and tester manually observes the change in what selection of powerups the tester can send to friends.
-\item One tester manually sends powerup to another, other tester manually tests the time until it is received, using a stopwatch. This
+\item Tester manually enters the leaderboards and presses the arrow next to a friend's name, expected to bring up a power-up selection menu.
+\item Tester manually enters the Send power-up selection menu, and selects all options for power-ups to be sent.
+\item Tester manually attempts to send a power-up to a friend immediately after sending a power-up to the same friend.
+\item Test code is written to alter the user experience level, and tester manually observes the change in what selection of power-ups the tester can send to friends.
+\item One tester manually sends power-up to another, other tester manually tests the time until it is received, using a stopwatch. This
 test is to be repeated with every combination of two devices that the game runs on.
-\item Tester manually attempts to send a powerup without an internet connection.
-\item Tester who received a powerup from a friend attempts to observe a Facebook notification alerting them they received a powerup.
-\item Tester who received a powerup observes their owned powerups, and the powerup they just received should appear there.
+\item Tester manually attempts to send a power-up without an internet connection.
+\item Tester who received a power-up from a friend attempts to observe a Facebook notification alerting them they received a power-up.
+\item Tester who received a power-up observes their owned power-ups, and the power-up they just received should appear there.
 
 
 \end{itemize}
@@ -1509,16 +1509,16 @@ test is to be repeated with every combination of two devices that the game runs 
 \item Evaluate the result: 
 
 \begin{itemize}
-\item Pressing the arrow on leaderboards next to a username is expected to bring up the powerup selections menu.
-\item Selecting and sending any powerup to a friend from the powerup selection menu should render the user incapable of sending
-any further powerups to that same user for an entire day. This means the user cannot access the Send Powerup selection menu for 
+\item Pressing the arrow on leaderboards next to a username is expected to bring up the power-up selections menu.
+\item Selecting and sending any power-up to a friend from the power-up selection menu should render the user incapable of sending
+any further power-ups to that same user for an entire day. This means the user cannot access the Send power-up selection menu for 
 that recipient for another day, and the arrow on leaderboards next to that username is grayed out.
-\item A user with a higher experience level should be able to send a wider selection of powerups to their friends.
-\item In all cases of one tester sending a powerup to another, regardless of which two devices are used, the recipient should
-receive the powerup in under five minutes, provided both have an internet connection.
-\item Without an internet connection, the tester should receive an error when attempting to send a powerup to a friend.
-\item When a user receives a powerup, they also promptly receive a Facebook notification alerting them of this, provided notifications are not disabled.
-\item When a user receives a powerup, that powerup should promptly appear as an option in their pregame powerup selections menu, and it should
+\item A user with a higher experience level should be able to send a wider selection of power-ups to their friends.
+\item In all cases of one tester sending a power-up to another, regardless of which two devices are used, the recipient should
+receive the power-up in under five minutes, provided both have an internet connection.
+\item Without an internet connection, the tester should receive an error when attempting to send a power-up to a friend.
+\item When a user receives a power-up, they also promptly receive a Facebook notification alerting them of this, provided notifications are not disabled.
+\item When a user receives a power-up, that power-up should promptly appear as an option in their pregame power-up selections menu, and it should
 reflect as being owned in the Store.
 \end{itemize}
 \item Generate report 
