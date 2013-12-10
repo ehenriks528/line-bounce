@@ -22,9 +22,8 @@ package
 			
 			this.addChild(GameViewController.initialize());
 			
-			this.addEventListener(KeyboardEvent.KEY_DOWN, testKeyDown);
+			GameViewController.enterGameView(GameViewController.getGameView("MainMenu"));
 			
-			GameViewController.enterGameView(GameViewController.getGameView("Test01"));
 			trace("GameView Entered");
 		}
 		
@@ -54,7 +53,6 @@ package
 					break;
 				
 			}
-		}		
-		
+		}
 	}
 }
