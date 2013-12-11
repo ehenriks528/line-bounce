@@ -1,13 +1,22 @@
 \chapter{System Level Testplan}
+
 \section{TSS-01 for Movement Mechanics}
 \begin{itemize}
-\item Goal: Determine that the jumping mechanics for the character in Line Bounce work robustly and accurately.
+\item Goal: Determine that the jumping mechanics for the character in Line Bounce work robustly and accurately
+
+\item Resources Required:
+\begin{itemize}
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
+\item Internet Connection 
+\item Server
+\end{itemize}
 
 \item Structure of the Test Plan (Applicable TES list):
 \begin{itemize}
-\item Game start movement (GAME-01)
-\item Pausing (GAME-09)
-
+\item Initialization of PlayState (GAME-01)
+\item Pause Functionality (GAME-09)
 \item Bouncing behavior
 \begin{itemize}
 \item Top of lines, velocity change (GAME-02)
@@ -15,32 +24,22 @@
 \item Bouncing off walls, velocity change (GAME-06)
 \item Platform size affecting velocity (GAME-12)
 \end{itemize}
-
 \item Off-screen movement
 \begin{itemize}
 \item Falling off (bottom of) screen (GAME-03)
 \item Moving up (top of) screen (GAME-04)
 \end{itemize}
-
 \item Collisions
 \begin{itemize}
-\item Power-up collection, activation, -doesn\textquoteright{}t affect movement- (GAME-08)
+\item Power-up collection and activation doesn’t affect movement (GAME-21)
 \item Touching enemies falling off screen ending game (GAME-03)
 \end{itemize}
-
 \item Movement affecting score (GAME-18)
 \end{itemize}
-
-\item Resources Required:
-\begin{itemize}
-\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
-\item Timing software
-\item Trajectory measuring software
 \end{itemize}
-\end{itemize}
-
 
 \subsection{TES-1.1: Game Start State}
+\label{subsec:gamestartstate}
 \begin{itemize}
 \item Goal: Show that the avatar, at the start of a game, will start at the top center of the user\textquoteright{}s screen and accelerate in the -y direction only
 \begin{itemize}
@@ -78,13 +77,14 @@
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-1.2: Pausing}
+\subsection{TES-1.2: Pause Functionality}
+\label{subsec:pausefunc}
 \begin{itemize}
-\item Goal: Show that, while in a pause state, all moving objects halt in place, but exiting the pause state will restore original movement
+\item Goal: Show that, while in PauseState, all moving objects halt in place, but resuming PlayState from PauseState will restore original movement after a one second countdown is displayed for the user
 \begin{itemize}
-\item Resumes gameplay in a coherent fashion that will not break the user\textquoteright{}s immersion in the game
-\item Objects originally moving in a certain trajectory will not suddenly change trajectory for no reason (see TES-1.3)
-\item Game state will be saved (see TES 2.1)
+\item Resumes gameplay without error
+\item Objects originally moving in a certain trajectory will not suddenly change trajectory for no reason
+\item Game state will be saved
 \end{itemize}
 
 \item Testcases:
@@ -97,14 +97,15 @@
 
 \item Capture the output
 \begin{itemize}
-\item Measure all states involved
+\item Measure all GameStates and Entity objects involved
+\item Time transition between issuing resume command while in PauseState and seeing change in velocity in Entity objects
 \end{itemize}
 
-\item Evaluate the results
+\item Evaluate the numeric result
 \begin{itemize}
-\item Compare the two active states, check pause state
+\item Compare the two active states, check pause state, and elapsed time variable
 \begin{itemize}
-\item Successful if the two states are exactly the same; pause state should be different and contain no movement
+\item Successful if two states are exactly the same AND elapsed time is exactly 1s; PauseState should be different and contain no movement
 \item Failure otherwise
 \end{itemize}
 \end{itemize}
@@ -116,14 +117,14 @@
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-1.3: Bouncing Behavior }
-\label{bounce}
+\subsection{TES-1.3: Bouncing Behavior}
+\label{subsec:bounce}
 \begin{itemize}
-\item Goal: Show that the avatar will bounce off of objects in game, that its trajectory changes in a fun and intuitive fashion 
+\item Goal: Show that the avatar will bounce off of objects in game, that its trajectory changes accurately
 
 \begin{itemize}
-\item Avatar will only change from -y to +y velocity when colliding with the top of drawn lines 
-\item Avatar will only change from +y to -y velocity when colliding with the top of drawn lines
+\item Avatar will change only from -y to +y velocity when colliding with the top of drawn lines
+\item Avatar will change only from +y to -y velocity when colliding with the bottom of drawn lines
 \item Side walls (left and right) are \textquotedblleft{}solid\textquotedblright{}: avatar will reverse x velocity upon collision
 \item Shorter drawn platforms will give more of a boost than longer drawn ones
 \end{itemize}
@@ -146,43 +147,9 @@
 \begin{itemize}
 \item Compare captured data with expected data (based off input)
 \begin{itemize}
-\item Successful if trajectories are reflected, but everything else should match
+\item Successful if trajectories are reflected, but everything else should remain unchanged
 \item Failure otherwise
 \end{itemize}
-\end{itemize}
-\item Generate report 
-
-\begin{itemize}
-\item Produce summary of generated reports (number of failures and successes)
-\item Evaluate automated testing summary with human confirmation in respect to the goal
-\end{itemize}
-\end{itemize}
-
-
-\subsection{TES-1.4: Off-Screen Movement}
-\begin{itemize}
-\item Goal: Show that the screen will follow the avatar when moving up the screen, but dies when falling down the screen
-
-\item Testcases
-\begin{itemize}
-\item Unit testing on avatar position: input all y coordinates that exit on screen and extend off screen by the avatar’s diameter
-\item Human confirmation
-\end{itemize}
-
-\item Capture the output
-\begin{itemize}
-\item Measure game state
-\item Visual capture
-\end{itemize}
-
-\item Evaluate the output data
-\begin{itemize}
-\item Compare game state with respect to vertical location
-\begin{itemize}
-\item Success = high vertical location always maintain active game play state; threshold low vertical location triggers game over state
-\item Failure otherwise
-\end{itemize}
-\item Visual evaluation: success if nothing seems wrong with respect to the goals
 \end{itemize}
 
 \item Generate report
@@ -192,22 +159,60 @@
 \end{itemize}
 \end{itemize}
 
-
-\subsection{TES-1.5: Avatar Collisions}
+\subsection{TES-1.4: Off-Screen Movement}
+\label{subsec:offscreen}
 \begin{itemize}
-\item Goal: Show that the avatar behaves differently in reaction to collisions with various objects
+\item Goal: Show that moving offscreen via climbing up maintains PlayState, but falling down offscreen triggers GameOverState
 
 \item Testcases
 \begin{itemize}
-\item Unit testing on avatar line collisions: (see bouncing behavior)
-\item Unit testing on avatar wall collisions: (see bouncing behavior)
+\item Unit testing on avatar position: input all y coordinates that exist on screen and extend off screen by the avatars diameter
+\item Human confirmation
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item Measure GameState
+\item Visual capture
+\end{itemize}
+
+\item Evaluate the output data
+\begin{itemize}
+\item Compare GameState with respect to vertical location
+\begin{itemize}
+\item Successful if a high vertical location always maintains PlayState; threshold low vertical location triggers GameOverState
+\item Failure otherwise
+\end{itemize}
+\item Visual confirmation: nothing looks wrong with respect to the goal
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-1.5: Avatar Collisions}
+\label{subsec:collisions}
+\begin{itemize}
+\item Goal: Show that the avatar behaves differently in reaction to collisions with various objects
+\begin{itemize}
+\item Avatar will bounce off of lines and walls (see \ref{subsec:bounce})
+\item Avatar will not be affected when collecting power-ups
+\item Avatar will be affected by the enemy
+\end{itemize}
+
+\item Testcases
+\begin{itemize}
+\item Unit testing on avatar power-up collisions
 \item Unit testing on avatar enemy behavior: from above, from below
 \item Human confirmation
 \end{itemize}
 
 \item Capture the output
 \begin{itemize}
-\item Measure trajectories, avatar state, power-up state, and line state before/after each collision
+\item Measure trajectories, AvatarEntity, PowerupEntity, and EnemyEntity before/after each collision
 \item Visual capture
 \end{itemize}
 
@@ -215,12 +220,12 @@
 \begin{itemize}
 \item Compare captured data with expected data (based off input)
 \begin{itemize}
-\item Successful if reflected trajectories, but everything else should match
+\item Successful if input Entities logically match up with captured results according to the goals
 \item Failure otherwise
 \end{itemize}
 \item Compare before/after avatar state (trajectory), enemy state
 \begin{itemize}
-\item Successful if before avatar y-component is lower than enemy's; after game state is game over OR before avatar y-component is greater than enemy's; after game state is active, avatar trajectory is reflected, enemy is dead
+\item Successful if before avatar y-component is lower than enemy's; after GameState is game over OR before avatar y-component is greater than enemy's; after GameState is active, avatar trajectory is reflected, enemy is dead
 \item Failure otherwise
 \end{itemize}
 \end{itemize}
@@ -232,15 +237,14 @@
 \end{itemize}
 \end{itemize}
 
-
-
 \subsection{TES-1.6: Movement Affecting Score}
+\label{subsec:movescore}
 \begin{itemize}
-\item Goal: Show that the avatar’s \textquotedblleft{}height\textquotedblright{} increases score
+\item Goal: Show that the user\textquoteright{}s score increments with their height
 
 \item Testcases
 \begin{itemize}
-\item Unit testing on avatar “height” increase: input randomly generated positive numbers as avatar height with a randomly generated positive increase
+\item Unit testing on avatar height increase: input randomly generated positive numbers as avatar height with a randomly generated positive increase in height as simulated input
 \end{itemize}
 
 \item Capture the output
@@ -253,9 +257,10 @@
 
 \item Evaluate the output data
 \begin{itemize}
-\item Compare game state with respect to vertical location
+\item Compare GameState with respect to vertical location
 \begin{itemize}
-\item Success = positive difference
+\item Successful if, after comparing the GameState with respect to vertical location, there is a positive difference on both counts
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -266,271 +271,266 @@
 \end{itemize}
 \end{itemize}
 
-
-\section{TSS-02 for Game State Mechanics }
+\section{TSS-02 for GameState Mechanics}
 \begin{itemize}
-\item Goal: Determine that the mechanics that govern when the game is started
-and lost work robustly and accurately.
-\item Resources Required: 
+\item Goal: Show  that the mechanics that govern triggering PlayState and GameOverState work robustly and accurately
 
+\item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
-\end{itemize}
-\item Structure of Test Plan: 
-
-\begin{itemize}
-\item Pause Button Pauses Game: GAME-09
-
-\begin{itemize}
-\item Player can end, resume or restart game from Pause menu 
-\end{itemize}
-\item User loses when touching lethal hazard 
-
-\begin{itemize}
-\item Contact with enemies: ACC-08
-\item Falling through bottom: GAME-03
-\end{itemize}
-\item Results of changing application state 
-
-\begin{itemize}
-\item Backgrounding the app mid-playthrough pauses game: SET-05
-\item Exiting the app mid-playthrough loses the game: SET-06 
-\end{itemize}
-\item In an optimal game the player climbs forever: ACC-05 
-
-\begin{itemize}
-\item Game should not transition to an end-state by climbing too high
-\end{itemize}
-\end{itemize}
-\end{itemize}
-
-\subsection{TES-2.1: Pause Menu }
-\begin{itemize}
-\item Goal: Show that the the Player can pause the game at any time during
-a playthrough, which freezes game state. Show that the user can terminate
-the game or restart their playthrough from the pause menu.
-\item Test cases: 
-
-\begin{itemize}
-\item User manually starts game, presses pause button. 
-\item From pause menu, user attempts to quit game. 
-\item From pause menu, user attempts to restart game.
-\item All of this will be performed manually by a tester, without using additional software.
-\end{itemize}
-\item Capture the output 
-
-\begin{itemize}
-\item Collect data on how game state responded to operations 
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item Pressing pause should bring up pause menu. 
-\item Attempting to quit game should exit from game, to game over screen. 
-\item Attempting to restart game should begin a new playthrough. 
-\end{itemize}
-\item Generate report 
-
-\begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
-\end{itemize}
-\end{itemize}
-
-\subsection{TES-2.2: Lethal Hazards }
-\label{hazard}
-\begin{itemize}
-\item Goal: Show that contact of the player\textquoteright{}s avatar with
-lethal hazards results in a lost game state as intended. 
-\item Test cases: 
-
-\begin{itemize}
-\item User\textquoteright{}s avatar makes contact with enemy avatar. 
-\item User\textquoteright{}s avatar makes contact with bottom of screen. 
-\item All of this will be performed manually by a tester without the use of additional software.
-\end{itemize}
-\item Capture the output 
-
-\begin{itemize}
-\item Collect data on how game state responded to operations 
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item Both cases should result in a lost game state. 
-\end{itemize}
-\item Generate report 
-
-\begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
-\end{itemize}
-\end{itemize}
-
-\subsection{TES-2.3: Change Application State }
-\begin{itemize}
-\item Goal: Show that changing the state of the application mid-playthrough
-produces the intended result relative to the state of the current
-playthrough. 
-\item Test cases: 
-
-\begin{itemize}
-\item Background the Line Bounce application mid-playthrough. 
-\item Exit the Line Bounce application mid-playthrough. 
-\item All of this will be performed manually by a tester without the use of additional software.
-\end{itemize}
-\item Capture the output 
-
-\begin{itemize}
-\item Collect data on how game state responded to operations 
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item Backgrounding the app mid-playthrough should pause the game, and bring
-up the Pause Menu. 
-\item Exiting the app mid-playthrough should exit the game. 
-\end{itemize}
-\item Generate Report 
-
-\begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
-\end{itemize}
-\end{itemize}
-
-\subsection{TES-2.4: Climbing High }
-\begin{itemize}
-\item Goal: Show that climbing to a high altitude by itself does not change
-the game state. 
-\item Test cases: 
-
-\begin{itemize}
-\item In a playthrough, climb to 10{[}a{]},000 feet. 
-\item In a playthrough, climb to 100,000 feet. 
-\item All of this will be performed manually by a tester without the use of additional software.
-\end{itemize}
-\item Capture the output 
-
-\begin{itemize}
-\item Collect data on how game state responded to operations 
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item In both cases, no matter how high the avatar climbs, game should not
-end. 
-\end{itemize}
-\item Generate Report 
-
-\begin{itemize}
-\item Produce summary of generated reports with regard to data collection 
-\item Evaluate summary with respect to goal
-\end{itemize}
-\end{itemize}
-
-\section{TSS-03 for Menus}
-\begin{itemize}
-\item Goal: Determine that the menus function according to the requirements.
-(Note: The Store menus will be covered in the Store TSS.)
-\item Resources Required: 
-
-\begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
-\item Structure of the Test Plan: 
 
+\item Structure of Test Plan: 
+\begin{itemize}
+\item Initialization of PlayState (see \ref{subsec:gamestartstate})
+\item PauseState (GAME-09)
+\begin{itemize}
+\item Player can end, resume, or restart a game from the pause menu
+\end{itemize}
+\item Triggering GameOverState from PlayState
+\begin{itemize}
+\item Enemy collision (see \ref{subsec:collisions})
+\item Falling off the bottom (see \ref{subsec:offscreen}))
+\end{itemize}
+\item Deactivating Application from PlayState
+\begin{itemize}
+\item Backgrounding the app mid-playthrough pauses game (SET-05)
+\item Exiting the app mid-playthrough loses the game (SET-06)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-2.1 Initialization of PlayState (see \ref{subsec:gamestartstate})}
+
+\subsection{TES-2.2 PauseState (see \ref{subsec:pausefunc}, \ref{subsec:navmenu})}
+
+\subsection{TES-2.3 Triggering GameOverState from PlayState (see \ref{subsec:offscreen} and \ref{subsec:collisions})}
+
+\subsection{TES-2.4: Deactivating Application from PlayState }
+\begin{itemize}
+\item Goal: Show that the Line Bounce application will respond accurately and robustly to deactivating commands from PlayState
+\begin{itemize}
+\item Backgrounding the application will trigger PauseState (see \ref{subsec:pausefunc})
+\item Exiting the application will not save user’s PlayState progress
+\end{itemize}
+
+\item Test cases: 
+\begin{itemize}
+\item Human tester manually performs before and after check
+\end{itemize}
+
+\item Capture the output 
+\begin{itemize}
+\item Human tester records relevant qualitative review of visual capture
+\end{itemize}
+
+\item Evaluate the result: 
+\begin{itemize}
+\item Compare captured data with expected data (based off goals)
+\begin{itemize}
+\item Successful if results match up accordingly with stated goal
+\item Failure otherwise
+\end{itemize}
+\end{itemize}
+
+\item Generate Report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\end{itemize}
+\end{itemize}
+
+\section{TSS-03 for MenuState/Navigation}
+\begin{itemize}
+\item Goal: Determine that the menus function accordingly to the requirementsDetermine that all aspects of the Main Menu function properly and satisfy performance requirements
+(Note: The Store menus will be covered in the Store TSS)
+
+\item Resources Required:
+\begin{itemize}
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
+\item Internet Connection 
+\item Server
+\end{itemize}
+
+\item Structure of the Test Plan: 
 \begin{itemize}
 \item Menu features are present and work correctly 
-
 \begin{itemize}
-\item The Main Menu should feature many options: MENU-02
-\item The Settings Menu should allow users to change options: MENU-04
+\item The Main Menu should feature many options (MENU-02)
+\item The Settings Menu should allow users to change options (MENU-04)
 \item The start screen will give the option of connecting to Facebook before
-going to the Main Menu: MENU-05
-\item The user can logout of Facebook from the Settings Menu: SET-04
+going to the Main Menu (MENU-05)
+\item The user can logout of Facebook from the Settings Menu (SET-04)
 \item Pressing the pause button will bring up a menu that allows the user
-to perform a few actions: GAME-09
-\item Buttons in menus should always perform desired functionality: ROB-02
+to perform a few actions (GAME-09)
+\item Buttons in menus should always perform desired functionality (ROB-02)
 \end{itemize}
-\item The menu will have fast response time: PER-04
+\item Fast menu response time (PER-04)
+\item Pressing each button sends user to the appropriate screen (MENU-01)
+\item All buttons and redirects function in accordance with Performance specifications (PER-04)
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-3.1: Menu features are present and function correctly }
+\subsection{TES-3.1: Navigation Menus are present and function correctly }
+\label{subsec:navmenu}
 \begin{itemize}
 \item Goal: Show that the menu features are present in the required locations
-and perform the required functions across all platforms. 
+and perform the required functions across all platforms
+
 \item Test cases: 
-
 \begin{itemize}
-\item Check for presence of all menu features 
+\item Unit testing on navigation simulated by relevant button pressed events from all possible start points to all possible end points
+\item Human tester manually navigates Line Bounce Application to verify unit test
+\end{itemize}
 
+\item Capture the output
 \begin{itemize}
-\item User navigates the game and menus 
+\item Measure state after simulated button presses
+\item Human tester records relevant qualitative review of visual capture
 \end{itemize}
-\item Check functionality of all menu features 
 
-\begin{itemize}
-\item User tries to use menu features manually 
-\item User writes and runs test code to check back-end functionality 
-\end{itemize}
-\end{itemize}
-\item Capture the output 
 \item Evaluate the result: 
-
 \begin{itemize}
-\item All required menu features should be present in the required locations 
-\item All menu features should function as required 
+\item Compare captured data with expected data (based off input)
+\begin{itemize}
+\item Successful if input states logically match up with captured results according to the goals AND human tester confirms this as well as obstruction of playfield from the PauseState (GAME-09)
+\item Failure otherwise
 \end{itemize}
-\item Generate report
 \end{itemize}
 
-\subsection{TES-3.2: The menu will have fast response time }
-\label{menu}
+\item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-3.2: Appropriate menu response time }
+\label{subsec:menu}
 \begin{itemize}
 \item Goal: Show that the menu feature response times satisfy the performance
-requirements. 
+requirements
+
 \item Test cases: 
-
 \begin{itemize}
-\item Check the response time of each menu feature 
+\item Unit testing on navigation simulated by relevant button pressed events from all possible start points to all possible end pointsi
+\end{itemize}
 
-\begin{itemize}
-\item User writes and runs test code that times each menu function 
-\end{itemize}
-\end{itemize}
 \item Capture the output 
-\item Evaluate the result: 
-
 \begin{itemize}
-\item All menu features should have a response time of under 0.25 seconds
+\item Record the elapsed time between button pressed event and arrival at destination
 \end{itemize}
+
+\item Evaluate the result: 
+\begin{itemize}
+\item Successful if all trials show a resultant time of under 0.25 seconds
+\item Failure otherwise
+\end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
+\subsection{TES-3.3: Menu buttons all redirect the user properly }
+\begin{itemize}
+\item Goal: Show that all buttons on the menu are functional, and redirect the user to the appropriate page.
 
+\item Test cases: 
+\begin{itemize}
+\item Test every main menu button to make sure it redirects correctly.
+\begin{itemize}
+\item Tester manually presses PLAY button.
+\item Tester manually presses LEADERBOARDS button.
+\item Tester manually presses SHOP button.
+\item Tester manually presses INVITE FRIEND button.
+\item Tester manually presses Settings icon.
+\end{itemize}
+\end{itemize}
 
-\section{TSS-04 for Store}
+\item Capture the output
+\begin{itemize}
+\item Tester manually saves test results into a spreadsheet.
+\end{itemize}
+
+\item Evaluate the result: 
+\begin{itemize}
+\item \label{subsec:select}
+Pressing PLAY takes user to pre-game power-up selection menu.
+\item Pressing LEADERBOARDS takes user to the leaderboards screen.
+\item Pressing SHOP takes user to the store.
+\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
+\item Pressing Settings icon takes user to Settings.
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\subsection{TES-3.4: Menu buttons respond with minimal delay}
+\begin{itemize}
+\item Goal: Show that all buttons on the main menu respond with minimal delay.
+
+\item Test Cases: 
+\begin{itemize}
+\item Unit testing on navigation simulated by relevant button pressed events from all possible start points to all possible end pointsi
+\end{itemize}
+
+\item Capture the output
+\begin{itemize}
+\item Record the elapsed time between button pressed event and arrival at destination
+\end{itemize}
+
+\item Evaluate the result: 
+\begin{itemize}
+\item Successful if all of the following is applicable:
+\begin{itemize}
+\item Pressing PLAY takes user to pre-game power-up selection menu.
+\item Pressing LEADERBOARDS takes user to the leaderboards screen.
+\item Pressing SHOP takes user to the store.
+\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
+\item Pressing Settings icon takes user to Settings.
+\end{itemize}
+\item Failure otherwise
+\end{itemize}
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
+\end{itemize}
+
+\section{TSS-04 for ShopState}
 \begin{itemize}
 \item Goal: Determine that the store is selectively accessible and accurately handles item display and purchase
 
-\item Structure of the Test Plan (Applicable TES list):
+\item Resources Required:
+\begin{itemize}
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
+\item Internet Connection 
+\item Server
+\end{itemize}
+
+\item Structure of the Test Plan:
 \begin{itemize}
 \item Accessibility
 \begin{itemize}
 \item Facebook authentication (SET-01)
 \item Fast response time (PER-07)
 \end{itemize}
-
 \item Product Display/Transaction
 \begin{itemize}
 \item Store will have many items (MENU-03)
@@ -538,18 +538,10 @@ requirements.
 \item History will be stored on secure database center (SEC-03)
 \end{itemize}
 \end{itemize}
-
-\item Resources Required:
-\begin{itemize}
-\item User(tester)
-\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
-\item Relevant software (testing automation)
-\item Timing software
 \end{itemize}
-\end{itemize}
-
 
 \subsection{TES-4.1 Accessibility}
+\label{subsec:accessibility}
 \begin{itemize}
 \item Goal: Show that the store will be accessible only when logged into the facebook, all responses will take 5 or fewer seconds
 
@@ -567,9 +559,9 @@ requirements.
 
 \item Evaluate the output data
 \begin{itemize}
-\item Compare store state with respect to login state
+\item Compare ShopState with respect to login status
 \begin{itemize}
-\item Successful if user logged in maps to open store; user logged out maps to closed store; total time doesn’t exceed 5 seconds
+\item Successful if user logged in maps to available ShopState; user logged out maps to unavailable ShopState; total time doesn’t exceed 5 seconds
 \item Failure otherwise
 \end{itemize}
 \item Human confirmation - success if nothing seems out of the ordinary
@@ -582,14 +574,13 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-
 \subsection{TES-4.2 Product Display/Transaction}
 \begin{itemize}
 \item Goal: Show that the store items will be display in accordance with experience level, user login state, and previous purchases and that there will be a multiple selections from multiple categories
 
 \item Testcases
 \begin{itemize}
-\item Unit testing on store login state: (see TES 4.1)
+\item Unit testing on ShopState vs login status: (see \ref{subsec:accessibility})
 \item Unit testing on experience level: randomly generate positive numbers to simulate user level
 \begin{itemize}
 \item Simulate purchase, do for each item category
@@ -599,7 +590,7 @@ requirements.
 
 \item Capture the output
 \begin{itemize}
-\item Capture store state/prompts, purchasable product list, currency state
+\item Capture ShopState/prompts, purchasable product list, currency state
 \item Visual confirmation
 \end{itemize}
 
@@ -607,7 +598,8 @@ requirements.
 \begin{itemize}
 \item Compare purchasable product lists across inputs
 \begin{itemize}
-\item Success(a): lists for lower levels should be contained by higher level lists
+\item Success(a): lists for lower levels are a subset of higher level ones
+\item Failure otherwise
 \end{itemize}
 \item Compare purchasable product list before and after purchase
 \begin{itemize}
@@ -623,7 +615,6 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-
 \section{TSS-05 for Accuracy/Input Detection}
 \begin{itemize}
 \item Goal: Determine that inputted gestures are being interpreted correctly by the game
@@ -633,7 +624,16 @@ requirements.
 \item Response timing: is it less than 24-33 ms (PER-05)
 \end{itemize}
 
-\item Structure of the Test Plan (Applicable TES list):
+\item Resources Required:
+\begin{itemize}
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
+\item Internet Connection 
+\item Server
+\end{itemize}
+
+\item Structure of the Test Plan:
 \begin{itemize}
 \item Intended input and response
 \begin{itemize}
@@ -641,23 +641,13 @@ requirements.
 \item Straight line approximation (ACC-02)
 \item Large finger compatibility (ACC-04)
 \end{itemize}
-
 \item Unintended input and response
 \begin{itemize}
 \item Accidental touches (ACC-03)
-\item Input from mixed devices
+\item Input from mixed devices (ROB-06)
 \end{itemize}
 \end{itemize}
-
-\item Resources Required:
-\begin{itemize}
-\item User(tester)
-\item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
-\item Relevant software (testing automation)
-\item Timing software
 \end{itemize}
-\end{itemize}
-
 
 \subsection{TES-5.1 Response to Intended Input}
 \begin{itemize}
@@ -666,7 +656,7 @@ requirements.
 \item Testcases
 \begin{itemize}
 \item Human tester will communicate with isolated input detection and simulate different finger thicknesses by swiping with pinky (thin) to thumb (thick)
-\item Unit testing: mouse click and drag events, insert inputted human testcases
+\item Unit testing: input sample mouse click and drag events provided by human tester
 \end{itemize}
 
 \item Capture the output
@@ -688,10 +678,9 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-
 \subsection{TES-5.2 Response to Unintended Input}
 \begin{itemize}
-\item Goal: Show that the game accurately detects and/or appropriate responds to unintended input
+\item Goal: Show that the game mechanics responds to unintended input
 
 \item Testcases
 \begin{itemize}
@@ -710,6 +699,7 @@ requirements.
 \item Compare before and after game state
 \begin{itemize}
 \item Success if there is no response/change of state
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -720,44 +710,44 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-
 \section{TSS-06 for Scoring}
 \begin{itemize}
 \item Goal: Determine that the score gets calculated, displayed, and stored
 
-\item Structure of the Test Plan (Applicable TES list):
-\begin{itemize}
-\item In-Game Display (GAME-18)
-\begin{itemize}
-\item Game start, during gameplay
-\end{itemize}
-
-\item After death (see leaderboards)
-\item Posting Scores (SOC-01)
-
-\item Storing Scores
-\begin{itemize}
-\item High score storage (SEC-03)
-\item Archives (SOC-02)
-\end{itemize}
-\end{itemize}
-
 \item Resources Required:
 \begin{itemize}
-\item User(tester)
+\item Human tester
 \item Relevant devices (iPhone/iPad, Android, facebook accessable PC and web browser)
 \item Relevant software (testing automation)
 \item Timing software
+\item Server
+\item Internet
+\end{itemize}
+
+\item Structure of the Test Plan:
+\begin{itemize}
+\item In-Game Display of Score (GAME-18)
+\begin{itemize}
+\item Game start, during gameplay
+\end{itemize}
+\item Score Notification
+\item Posting Scores (SOC-01)
+\item Exporting Scores
+\begin{itemize}
+\item Storing high score (SEC-03)
+\item Archiving scores (SOC-02)
+\end{itemize}
 \end{itemize}
 \end{itemize}
 
-
-\subsection{TES 6.1 In-Game Display}
+\subsection{TES 6.1 In-Game Display of Score}
 \begin{itemize}
 \item Goal: Show that the scoring during game play gets calculated and displayed in a logical way
 
-\item Testcases (see TES 1.4)
-\item Capture the output (see TES 1.4)
+\item Testcases (see \ref{subsec:movescore})
+
+\item Capture the output (see \ref{subsec:movescore})
+
 \item Evaluate the output data
 \begin{itemize}
 \item Graph collective output:
@@ -775,7 +765,8 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-\subsection{TES 6.2 Score Notification: (see Leaderboards)}
+\subsection{TES 6.2 Score Notification: (see \ref{subsec:viewleader})}
+
 \subsection{TES 6.3 Posting Scores}
 \begin{itemize}
 \item Goal: Show that the game can successfully post scores as a facebook feed update
@@ -803,11 +794,11 @@ requirements.
 
 \subsection{TES 6.4 Exporting Scores}
 \begin{itemize}
-\item Goal: Show that the game is able to stores the final score of any game at the database 
+\item Goal: Show that the game is able to store the final score of any game at the database 
 
 \item Testcases
 \begin{itemize}
-\item Unit testing: simulate game over state and randomly generate dummy scores, pass to simulated backend using official client-server implementation
+\item Unit testing: simulate GameOverState and randomly generate dummy scores, pass to simulated backend using official client-server implementation
 \end{itemize}
 
 \item Capture the output
@@ -817,9 +808,10 @@ requirements.
 
 \item Evaluate the output data
 \begin{itemize}
-\item Compare inputted dummy score with most recent score capture at dummy backend
+\item Compare inputted dummy score with most recent score captured at dummy backend
 \begin{itemize}
 \item Success if the scores are the same
+\item Failure otherwise
 \end{itemize}
 \end{itemize}
 
@@ -830,75 +822,82 @@ requirements.
 \end{itemize}
 \end{itemize}
 
-
-
-\section{TSS-07 for Leaderboards}
+\section{TSS-07 for LeaderboardState}
 \begin{itemize}
 \item Goal: Determine that leaderboard features work as required.
 
-\item Resources Required: 
+\item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
 
 \item Structure of the Test Plan: 
 \begin{itemize}
-\item Viewing Leaderboards: ENV-11, partially covered in \ref{subsec:accessdata}
-\item Social Notifications \ref{subsec:notifications}
-\item Responsiveness \ref{menu}
+\item Viewing Leaderboards (ENV-11, see \ref{subsec:accessdata})
+\item Social Notifications
+\item Responsiveness
 \end{itemize}
 \end{itemize}
 
 \subsection{TES-7.1: Viewing Leaderboards}
+\label{subsec:viewleader}
 \begin{itemize}
-\item Goal: Determine that the leaderboard data can be viewed properly. (data 
-access and retrieval covered in \ref{subsec:accessdata})
+\item Goal: Show that a global leaderboard/fb friend specific leaderboard is accessiable and that a toggle button switches between the two views
+
 \item Testcases: 
 \begin{itemize}
-\item Tester manually toggles between global and friend-only leaderboards
-\item Tester manually scrolls through the leaderboards
+\item Testing on accuracy of access/retrieval of leaderboard data (see \ref{subsec:accessdata})
+\item Human tester manually navigates leaderboards and toggles button
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
-\item Observe the effects of toggling and scrolling
-\item Observe the outputted data
+\item Observe and record the effects of toggling and scrolling and resultant outputted data
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
-\item Check that toggling and scrolling work
-\item Check that data appears correctly
+\item Successful if toggling/scrolling work and data appears correctly from captured results
+\item Faiure otherwise
 \end{itemize}
-\item Generate report 
+
+\item Generate report
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
 \end{itemize}
+\end{itemize}
+
+\subsection{TES-7.2: Social Notifications (see \ref{subsec:notifications})}
+
+\subsection{TES-7.3: Responsiveness (see \ref{subsec:menu})}
 
 \section{TSS-08 for Settings}
 \begin{itemize}
 \item Goal: Determine that settings features work as required.
 
-\item Resources Required: 
+\item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester with a functional synus system
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser) with working speakers
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
 
 \item Structure of the Test Plan: 
 \begin{itemize}
-\item Sound effects: MENU-04, ENV-05
-\item Background music: MENU-04, ENV-05
-\item Sync purchases \ref{subsec:sync}
-\item Reset progress  \ref{subsec:reset}
-\item Notifications  \ref{subsec:notifications}
-\item Facebook log out  \ref{subsec:logout}
-\item Responsiveness \ref{menu}
+\item Sound effects (MENU-04, ENV-05)
+\item Background music (MENU-04, ENV-05)
+\item Sync purchases (see \ref{subsec:sync})
+\item Reset progress (see \ref{subsec:reset})
+\item Notifications (see \ref{subsec:notifications})
+\item Facebook log out (see \ref{subsec:logout})
+\item Responsiveness (see \ref{subsec:menu})
 \end{itemize}
 \end{itemize}
 
@@ -906,440 +905,339 @@ access and retrieval covered in \ref{subsec:accessdata})
 \begin{itemize}
 \item Goal: Determine that sound effects can be turned on or off using the 
 toggle control in the Settings menu.
+
 \item Testcases: 
 \begin{itemize}
-\item Tester manually toggles the sound effect option on and starts the game
-\item Tester manually toggles the sound effect option off and starts the game
+\item Human tester listens to sample sound effects and manually toggles the sound effect option on/off and starts the game while setting the device volume to the maximum level
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
-\item Observe the sound output during gameplay and menu navigation
+\item Observe and record the sound output during gameplay and menu navigation
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
-\item Check that sound effects are audible when sound effect option is on
-\item Check that sound effects are inaudible when sound effect option is off
+\item Successful if the sound effects are audible when sound effect option is on and inaudible when sound effect option is off
+\item Failure otherwise
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
 \subsection{TES-8.2: Background Music}
 \begin{itemize}
-\item Goal: Determine that background music can be turned on or off using the 
-toggle control in the Settings menu.
+\item Goal: Determine that background music can be turned on or off using the toggle control in the Settings menu.
+
 \item Testcases: 
 \begin{itemize}
-\item Tester manually toggles the background music option on and starts the game
-\item Tester manually toggles the background music option off and starts the game
+\item Human tester listens to sample of background music and manually toggles the background music option on/off and starts the game while setting the device volume to the maximum level
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
-\item Observe the sound output during gameplay and menu navigation
+\item Observe and record the sound output during gameplay and menu navigation
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
-\item Check that background music is audible when background music option is on
-\item Check that background music is inaudible when background music option is off
+\item Successful if the background music is audible when background music effect is on and inaudible when the option is off
+\item Failure otherwise
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\section{TSS-09 for Main Menu}
-\begin{itemize}
-\item Goal: Determine that all aspects of the Main Menu function properly and satisfy
-performance requirements.
-\item Resources Required: 
+\subsection{TES-8.3: Sync purchases (see \ref{subsec:sync})}
+\subsection{TES-8.4: Reset progress  (see \ref{subsec:reset})}
+\subsection{TES-8.5: Notifications  (see \ref{subsec:notifications})}
+\subsection{TES-8.6: Facebook log out  (see \ref{subsec:logout})}
+\subsection{TES-8.7: Responsiveness (see \ref{subsec:menu})}
 
+\section{TSS-09 for EnemyEntities}
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Goal: Determine that all aspects regarding Enemies perform as specified in the requirements
+
+\item Resources Required:
+\begin{itemize}
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
+
 \item Structure of the Test Plan: 
-
 \begin{itemize}
-
-\item Pressing each button sends user to the appropriate screen. MENU-01
-\item All buttons and redirects function in accordance with Performance specifications. PER-04
+\item Enemy generation occurs randomly, but according to a formula (GAME-16)
+\item An Enemy is destroyed if the user's avatar makes contact with its top half
+\item Contact with the bottom half of an Enemy causes the player to lose (ACC-08)
+\item Enemies are stationary
 
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-9.1: Menu buttons all redirect the user properly }
+\subsection{TES-9.1: Enemy Generation occurs randomly, and follows preset formula correctly }
 \begin{itemize}
-\item Goal: Show that all buttons on the menu are functional, and redirect the user to the appropriate page.
+\item Goal: Show that enemies are generated randomly according to a formula that is based on the player's current ingame score and the player's overall experience level
+
 \item Test cases: 
-
-\begin{itemize}
-\item Test every main menu button to make sure it redirects correctly.
-
-\begin{itemize}
-\item Tester manually presses PLAY button.
-\item Tester manually presses LEADERBOARDS button.
-\item Tester manually presses SHOP button.
-\item Tester manually presses INVITE FRIEND button.
-\item Tester manually presses Settings icon.
-
-\end{itemize}
-
-\end{itemize}
-\item Capture the output
-\begin{itemize}
-\item Tester manually saves test results into a spreadsheet.
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item \label{select}
-Pressing PLAY takes user to pre-game power-up selection menu.
-\item Pressing LEADERBOARDS takes user to the leaderboards screen.
-\item Pressing SHOP takes user to the store.
-\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
-\item Pressing Settings icon takes user to Settings.
-\end{itemize}
-\item Generate report
-\end{itemize}
-
-\subsection{TES-9.2: Menu buttons respond with minimal delay}
-\begin{itemize}
-\item Goal: Show that all buttons on the main menu respond with minimal delay.
-\item Test Cases: 
-\begin{itemize}
-\item \ref{menu}
-\end{itemize}
-\item Capture the output
-\begin{itemize}
-\item Tester manually saves test results into a spreadsheet.
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item Pressing PLAY takes user to pre-game power-up selection menu.
-\item Pressing LEADERBOARDS takes user to the leaderboards screen.
-\item Pressing SHOP takes user to the store.
-\item Pressing INVITE FRIEND takes user to the Invite A Friend screen.
-\item Pressing Settings icon takes user to Settings.
-\end{itemize}
-\item Generate report
-\end{itemize}
-
-
-
-\section{TSS-10 for Enemies}
-\begin{itemize}
-\item Goal: Determine that all aspects regarding Enemies perform as specified in the requirements.
-\item Resources Required: 
-
-\begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
-\item Internet Connection 
-\item Server
-\end{itemize}
-\item Structure of the Test Plan: 
-
-\begin{itemize}
-
-\item Enemy generation occurs randomly, but according to a formula: GAME-16
-\item An Enemy is destroyed if the user's avatar makes contact with its top half.
-\item Contact with the bottom half of an Enemy causes the player to lose: ACC-08
-\item Enemies are stationary.
-
-\end{itemize}
-\end{itemize}
-
-\subsection{TES-10.1: Enemy Generation occurs randomly, and follows preset formula correctly }
-\begin{itemize}
-\item Goal: Show that enemies are generated randomly according to a formula that is based 
-on the player's current ingame score and the player's overall experience level.
-\item Test cases: 
-
 \begin{itemize}
 \item Test enemy generation based on height and level
-
 \begin{itemize}
 \item Write code that increments each time an enemy is generated and records the score and user's experience
 level at the time of capture.
 \item Repeat for a statistically significant number of playthroughs, with a range of user levels.
-
+\end{itemize}
 \end{itemize}
 
-\end{itemize}
 \item Capture the output
 \begin{itemize}
 \item Save all test outputs and collect information into a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item Compare the formula for enemy generation against the spreadsheet data to determine accuracy.
 \end{itemize}
-\item Generate report
-\end{itemize}
 
-\subsection{TES-10.2: Destroying Enemies }
-\begin{itemize}
-\item Goal: Show that the functionality of destroying enemies by making contact between
-the user's avatar and the top half of the enemy works properly and accurately.
-\item Test cases: 
-
-\begin{itemize}
-\item Test to make sure enemies are destroyed by touching top half. 
-
-\begin{itemize}
-\item User manually plays line bounce and contacts top half of an enemy with the avatar.
-\item User repeats this process for every type of enemy that appears ingame. 
-\end{itemize}
-\end{itemize}
-\item Capture the output 
-\begin{itemize}
-\item User writes down results
-\end{itemize}
-\item Evaluate the result: 
-
-\begin{itemize}
-\item All enemy types should respond to being touched on top with destruction.
-\end{itemize}
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-10.3: Enemies As Hazard }
-\begin{itemize}
-\item Goal: Show that the functionality of destroying enemies by making contact between
-the users avatar and the top half of the enemy works properly and accurately.
-\item Test cases: 
+\subsection{TES-9.2: Destroying Enemies (see \ref{subsec:collisions})}
 
-\begin{itemize}
-\item \ref{hazard}
-\item Repeat for each enemy type.
-\item This test will be performed manually by a tester without the use of testing software.
-\end{itemize}
-\item Capture the output 
-\begin{itemize}
-\item User records results in a spreadsheet.
-\end{itemize}
-\item Evaluate the result: 
+\subsection{TES-9.3: Enemies As Hazard (see \ref{subsec:collisions})}
 
-\begin{itemize}
-\item If the avatar makes contact with any enemy type from the bottom, it should result in a lost game. 
-\end{itemize}
-\item Generate report 
-\end{itemize}
-
-\subsection{TES-10.4: Enemy Movement }
+\subsection{TES-9.4: Enemy Movement }
 \begin{itemize}
 \item Goal: Show that enemies do not move under any circumstances, and disappear when they are destroyed.
-\item Test cases: 
 
+\item Test cases: 
 \begin{itemize}
-\item Test to make sure enemies don't move.
-\begin{itemize}
-\item Tester manually plays game and encounters all enemy types.
-\item Tester keeps spreadsheet and records enemy behavior before and after destroying that enemy.
+\item For each type of EnemyEntity: unit test such that the EnemyEntity generates at iniitialization of simulated PlayState followed by directed trajectory such that AvatarEntity destroys it with human tester observing this as an automated run through
 \end{itemize}
-\end{itemize}
+
 \item Capture the output 
 \begin{itemize}
-\item User records results in a spreadsheet.
+\item Measure velocity on generated EnemyEntity
+\item Have human tester observer and confirm results for each unit test
 \end{itemize}
+
 \item Evaluate the result: 
-
 \begin{itemize}
-\item For each enemy type, that enemy should not move, and should disappear when destroyed.
+\item Successful if EnemyEntity does not move and disappears when destroyed
+\item Failure otherwise
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\section{TSS-11 for Lines}
+\section{TSS-10 for Lines}
 \begin{itemize}
-\item Goal: Determine that all mechanics of lines function properly, and satisfy requirements
-for robustness and accuracy.
+\item Goal: Determine that all mechanics of lines function properly, and satisfy requirements for robustness and accuracy
 
 \item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
-\item Structure of the Test Plan: 
 
+\item Structure of the Test Plan: 
 \begin{itemize}
 
-\item Line Spool feature functions properly. GAME-19
-\item Bounce mechanics function correctly, including bounce-to-length ratio. GAME-02
-\item Lines drawn through enemies and avatars do nothing. GAME-20
+\item Line Spool feature functions properly (GAME-19)
+\item Bounce mechanics function correctly, including bounce-to-length ratio (GAME-02)
+\item Lines drawn through enemies and avatars do nothing (GAME-20)
 
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-11.1: Line Spool }
+\subsection{TES-10.1: Line Spool }
 \begin{itemize}
 \item Goal: Show that Line Spool feature works properly, according to functional specifications.
-\item Test cases: 
 
+\item Test cases: 
 \begin{itemize}
-\item Test that Line Spool only gives the player a length of line equal to the screen width to draw.
+\item Test that Line Spool only gives the player a length of line equal to the screen width to draw
 \begin{itemize}
-\item Write test code to measure screen width and compare it to the length of lines drawn.
-\item Tester manually draws longest possible line, which should not exceed one screen width.
-\item After using up total Line Spool, tester manually draws more lines. 
+\item Write test code to measure screen width and compare it to the length of lines drawn
+\item Tester manually draws longest possible line, which should not exceed one screen width
+\item After using up total Line Spool, tester manually draws more lines
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item Total line length drawable at once may not exceed one screen width.
 \item When all Line Spool is used up, drawing one additional line should erase the first line drawn
 refunding an amount of line spool equal to the length of the erased line. 
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-11.2: Bounce Mechanics }
+\subsection{TES-10.2: Bounce Mechanics}
 \begin{itemize}
-\item Goal: Show that the Bounce Mechanics regarding lines work properly, including
-bounce-to-length ratio. 
+\item Goal: Show that the Bounce Mechanics regarding lines work properly, including bounce-to-length ratio. 
+
 \item Test cases: 
-
 \begin{itemize}
-\item \ref{bounce}
+\item (see \ref{subsec:bounce})
 \end{itemize}
+
 \item Capture the output
 \begin{itemize}
 \item User records all bounce heights and directions in a spreadsheet.
 \end{itemize}
+
 \item Evaluate the result: 
 \begin{itemize}
-\item \ref{bounce}
+\item (see \ref{subsec:bounce})
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-
-
-
-\section{TSS-12 for Pregame power-up Selection}
+\section{TSS-11 for Pregame power-up Selection}
 \begin{itemize}
-\item Goal: Determine that the pregame power-up selection menu works properly and in accordance
-with performance and accuracy requirements. FUN-35
-for robustness and accuracy.
+\item Goal: Determine that the pregame power-up selection menu works properly and in accordance with performance and accuracy requirements (FUN-35) for robustness and accuracy
 
 \item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
+
 \item Structure of the Test Plan: 
-
 \begin{itemize}
-
-\item Power-up Selections work properly. MENU-06
-\item Power-up Selection menu functions quickly and accurately.
+\item Power-up Selections work properly (MENU-06)
+\item Power-up Selection menu functions quickly and accurately
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-12.1: power-up Selections Work Properly }
-\label{power-ups}
+\subsection{TES-11.1: Power-up Selections Work Properly }
+\label{subsec:power-ups}
 \begin{itemize}
-\item Goal: Show that all functionality related to power-up selections works properly. 
+\item Goal: Show that all functionality related to power-up selections works properly
+
 \item Test cases: 
-
 \begin{itemize}
-\item Test that all power-ups the user owns can be selected from the pregame menu, and that selection works properly.
+\item Test that all power-ups the user owns can be selected from the pregame menu, and that selection works properly
 \begin{itemize}
-\item Tester manually selects all power-ups before playthrough from the pregame menu.
-\item Tester manually observes the number of power-ups before and after selection.
-\item Tester manually observes whether all power-ups selected appear ingame.
+\item Tester manually selects all power-ups before playthrough from the pregame menu
+\item Tester manually observes the number of power-ups before and after selection
+\item Tester manually observes whether all power-ups selected appear ingame
 \end{itemize}
 \item Test that power-up selections menu appears when the PLAY button is pressed from Main Menu.
 \begin{itemize}
-\item \ref{select}
+\item (see \ref{subsec:select})
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records all results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item The count of any power-up selected from the menu should drop by one after it is used.
 \item Any and all items selected from the menu should appear and be active ingame.
 \item All power-ups on the menu should be selectable.
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-12.2: power-up Selections Work Properly }
+\subsection{TES-11.2: power-up Selections Work Properly }
 \begin{itemize}
-\item Goal: Show that the power-up selections menu functions quickly and accurately. 
-\item Test cases: 
+\item Goal: Show that the power-up selections menu functions quickly and accurately.
 
+\item Test cases: 
 \begin{itemize}
 \item Test that the menu responds quickly to input.
 \begin{itemize}
-\item \ref{menu}
+\item \ref{subsec:menu}
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
+
 \item Evaluate the result: 
-
 \begin{itemize}
-\item \ref{menu}
+\item \ref{subsec:menu}
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize} 
 \end{itemize}
 
-
-
-
-\section{TSS-13 for Post Game Menu}
+\section{TSS-12 for Post Game Menu}
 \begin{itemize}
-\item Goal: Determine that the Post Game menu contains the appropriate content, and functions robustly and accurately.
-
-for robustness and accuracy.
+\item Goal: Determine that the Post Game menu contains the appropriate content, and functions robustly and accurately for robustness and accuracy.
 
 \item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
+
 \item Structure of the Test Plan: 
-
 \begin{itemize}
-
-\item Post game menu appears after game ends and offers the player a chance to start a new game, post a score to the Social page, 
-go to the Store, go to the leaderboards or return to the Main Menu. MENU-01
-
-\item Post game menu functions quickly and accurately. PER-04
+\item Post game menu appears after game ends and offers the player a chance to start a new game, post a score to the Social page, go to the Store, go to the leaderboards or return to the Main Menu (MENU-01)
+\item Post game menu functions quickly and accurately (PER-04)
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-13.1: Post Game Menu Selections Work Properly }
+\subsection{TES-12.1: Post Game Menu Selections Work Properly }
 \begin{itemize}
 \item Goal: Show that all functionality related to post game menu selections works properly. 
-\item Test cases: 
 
+\item Test cases: 
 \begin{itemize}
 \item Tester manually loses a game by force closing the application mid-playthrough, then re-opens the application.
 \item Tester manually loses a game by contacting an enemy, and by falling through the bottom, and records the next screen.
@@ -1349,12 +1247,13 @@ go to the Store, go to the leaderboards or return to the Main Menu. MENU-01
 \item Tester manually attempts to go to the leaderboards from the game over menu.
 \item Tester manually attempts to return to the Main Menu from the game over menu.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records all results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item Result of force-closing the app mid-playthrough and reopening should NOT land the tester at the Game Over menu.
 \item Result of losing the game by contacting enemy or falling through bottom SHOULD direct the tester to Game Over menu.
@@ -1364,64 +1263,69 @@ go to the Store, go to the leaderboards or return to the Main Menu. MENU-01
 \item Attempting to go to the leaderboards from the Game Over Menu should direct the tester to the leaderboards.
 \item Attempting to go to the main menu from the Game Over Menu should direct the tester to the leaderoards.
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-13.2: Game Over Menu Works Properly }
+\subsection{TES-12.2: Game Over Menu Works Properly }
 \begin{itemize}
 \item Goal: Show that the Game Over menu functions quickly and accurately. 
-\item Test cases: 
 
+\item Test cases: 
 \begin{itemize}
 \item Test that the menu responds quickly to input.
 \begin{itemize}
-\item \ref{menu}
+\item \ref{subsec:menu}
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
+
 \item Evaluate the result: 
-
 \begin{itemize}
-\item \ref{menu}
+\item \ref{subsec:menu}
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-
-
-\section{TSS-14 for power-ups}
+\section{TSS-13 for Power-ups}
 \begin{itemize}
-\item Goal: Determine that all functionality related to power-ups functions properly and with respect to performance, accuracy, and robustness requirements.
-
-for robustness and accuracy.
+\item Goal: Determine that all functionality related to power-ups functions properly and with respect to performance, accuracy, and robustness requirements for robustness and accuracy.
 
 \item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item TWO iPhones
-\item TWO Android Phones
-\item TWO Computers
+\item Human tester
+\item TWO Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
 \end{itemize}
+
 \item Structure of the Test Plan: 
-
 \begin{itemize}
-
-\item Power-ups selected from the Pregame power-up Selections Menu appropriately function ingame. MENU-06
-\item Power-ups obtained ingame are successfully acquired upon touching the avatar, and activate immediately. GAME-13
-\item Functionality related to sending and receiving power-ups to and from friends works properly. SOC-04
+\item Power-ups selected from the Pregame power-up Selections Menu appropriately function ingame (MENU-06)
+\item Power-ups obtained ingame are successfully acquired upon touching the avatar, and activate immediately (GAME-13)
+\item Functionality related to sending and receiving power-ups to and from friends works properly (SOC-04)
 
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-14.1: Preselected power-ups Function Appropriately }
+\subsection{TES-13.1: Preselected power-ups Function Appropriately }
 \begin{itemize}
-\item Goal: Show that all functionality related to preselected power-ups works properly. 
+\item Goal: Show that all functionality related to preselected power-ups works properly
+
 \item Test cases: 
-
 \begin{itemize}
-\item \ref{power-ups}
+\item (see \ref{subsec:power-ups})
 \item Tester manually keeps track of all power-ups selected from the pregame power-up selection menu, and verifies that all
 icons are displayed onscreen during the game.
 \item Tester manually keeps track of all power-ups selected from the pregame power-up selection menu, and verifies each one 
@@ -1432,12 +1336,13 @@ activates at the appropriate time during the playthrough.
 \item Tester Equips an on-start item before game, and starts a playthrough.
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records all results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item All power-ups preselected have their icons appear on the screen, and these icons are removed once the item is used up.
 \item SHIELD power-up lasts around the character until contact with a lethal Enemy hazard is made, at which point it is consumed, removed, and its icon disappears.
@@ -1445,16 +1350,19 @@ activates at the appropriate time during the playthrough.
 \item On-start power-ups from the pregame power-up selections menu activate immediately upon the avatar touching the ground at the start of a game.
 
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-
-
-\subsection{TES-14.2: power-ups Acquired Ingame}
+\subsection{TES-13.2: power-ups Acquired Ingame}
 \begin{itemize}
 \item Goal: Show that all functionality related to ingame-acquired power-ups functions properly.
-\item Test cases: 
 
+\item Test cases: 
 \begin{itemize}
 \item Test code is written to release all power-up types IN-GAME, and the tester manually makes contact between his/her avatar and
 the released power-ups.
@@ -1465,12 +1373,13 @@ the released power-ups.
 \end{itemize}
 \item Tester manually observes whether an item acquired ingame and stored has an icon appear for it onscreen.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records all results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item Any power-up the avatar touches ingame is immediately acquired, and depending on the type of power-up, stored or activated immediately.
 \item All power-ups acquired ingame have their icons appear on the screen, and these icons are removed once the item is used up.
@@ -1479,17 +1388,20 @@ the released power-ups.
 \item Power-ups lose their ingame on-screen icons while actively in use.
 
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-
-\subsection{TES-14.3: Sending And Receiving power-ups }
+\subsection{TES-13.3: Sending And Receiving power-ups }
 \begin{itemize}
 \item Goal: Show that all functionality related to sending and receiving power-ups to and from other users works properly.
+
 \item Test cases: 
-
 \begin{itemize}
-
 \item Tester manually enters the leaderboards and presses the arrow next to a friend's name, expected to bring up a power-up selection menu.
 \item Tester manually enters the Send power-up selection menu, and selects all options for power-ups to be sent.
 \item Tester manually attempts to send a power-up to a friend immediately after sending a power-up to the same friend.
@@ -1502,12 +1414,13 @@ test is to be repeated with every combination of two devices that the game runs 
 
 
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item User records all results in a spreadsheet.
 \end{itemize}
-\item Evaluate the result: 
 
+\item Evaluate the result: 
 \begin{itemize}
 \item Pressing the arrow on leaderboards next to a username is expected to bring up the power-up selections menu.
 \item Selecting and sending any power-up to a friend from the power-up selection menu should render the user incapable of sending
@@ -1521,31 +1434,35 @@ receive the power-up in under five minutes, provided both have an internet conne
 \item When a user receives a power-up, that power-up should promptly appear as an option in their pregame power-up selections menu, and it should
 reflect as being owned in the Store.
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\section{TSS-15 for Facebook Features}
+\section{TSS-14 for Facebook Features}
 \begin{itemize}
 \item Goal: Determine that the Facebook features work robustly and accurately.
+
 \item Resources Required:
 \begin{itemize}
-\item User Hours 
-\item iPhone 
-\item Android Phone 
-\item Computer 
+\item Human tester
+\item Relevant devices (iPhone/iPad, Android, facebook accessible PC and web browser)
+\item Timing software
 \item Internet Connection 
 \item Server
-\item Facebook accounts
-\end{itemize} 
-\item Structure of the Test Plan (Applicable TES list): 
+\end{itemize}
 
+\item Structure of the Test Plan: 
 \begin{itemize}
-\item Login: SEC-01, MENU-04, PER-07
-\item Logout: MENU-04, SET-04, PER-07
-\item Data access: SOC-02, ENV-11, PER-07
-\item Posting data: SOC-01, SOC-02, PER-07
-\item Invitations: SOC-03, PER-07
-\item Gifting items: SOC-04, PER-07
+\item Login (SEC-01, MENU-04, PER-07)
+\item Logout (MENU-04, SET-04, PER-07)
+\item Data access (SOC-02, ENV-11, PER-07)
+\item Posting data (SOC-01, SOC-02, PER-07)
+\item Invitations (SOC-03, PER-07)
+\item Gifting items (SOC-04, PER-07)
 \item Payment processing: SEC-02, SET-01, PER-07
 \item Notifications: MENU-04, SOC-05, SOC-06
 \item Data synchronization: SEC-04, MENU-04, SAF-04, ROB-04
@@ -1553,54 +1470,71 @@ reflect as being owned in the Store.
 \end{itemize}
 \end{itemize}
 
-\subsection{TES-15.1: Login}
+\subsection{TES-14.1: Login}
 \begin{itemize}
 \item Goal: Determine that Facebook login feature works correctly and 
 satisfies performance requirements.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will try logging into 5 valid Facebook accounts 
 on the iOS and Android applications, timing the response.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time 
 \item Record response to login attempt
 \end{itemize}
+
 \item Evaluate the output
 \begin{itemize}
 \item Check that login was successful
 \item Check that login took under 5 seconds to complete
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.2: Logout}
+\subsection{TES-14.2: Logout}
 \label{subsec:logout}
 \begin{itemize}
 \item Goal: Determine that the Facebook logout feature works correctly.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will try logging out of 5 valid Facebook accounts 
 on the iOS and Android applications, timing the response.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time 
 \item Record response to logout attempt
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that logout was successful
 \item Check that logout took under 5 seconds to complete
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.3: Data Access}
+\subsection{TES-14.3: Data Access}
 \label{subsec:accessdata}
 \begin{itemize}
 \item Goal: Determine that the user can access authorized data.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will attempt to retrieve the following data, 
@@ -1614,22 +1548,30 @@ timing the responses.
 \item Items
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time 
 \item Record response to data retrieval attempts
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the data retrievals were successful
 \item Check that data retrievals took under 5 seconds to complete
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.4: Posting Data}
+\subsection{TES-14.4: Posting Data}
 \begin{itemize}
 \item Goal: Determine that the user can post authorized data.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will attempt to post the following data, 
@@ -1640,23 +1582,31 @@ timing the responses.
 \item Personal messages
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time 
 \item Record response to data retrieval attempts
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the posts were successful
 \item Check that posts took under 5 seconds to complete
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize} 
 \end{itemize}
 
-\subsection{TES-15.5: Invitations}
+\subsection{TES-14.5: Invitations}
 \begin{itemize}
 \item Goal: Determine that the user can invite friends and properly get 
 rewarded for invitations.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will attempt to invite several friends, 
@@ -1666,6 +1616,7 @@ timing the responses and checking the difference in coins possessed.
 \item Manually accept those invites, checking the difference in coins 
 possessed by the inviting accounts.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time 
@@ -1673,46 +1624,61 @@ possessed by the inviting accounts.
 \item View Facebook profiles of invited accounts
 \item Calculate coins aquired through accepted invitations
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that invites were received
 \item Check that the proper amounts of coins were received
 \item Check that response took under 5 seconds to receive
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.6: Gifting Items}
+\subsection{TES-14.6: Gifting Items}
 \begin{itemize}
 \item Goal: Determine that the user can gift items to friends and that the
 gift cooldown works properly.
+
 \item Testcases: 
 \begin{itemize}
-\item Write and run code that will first attempt to gift an item to a friend, 
+\item Write and run code that will first attempt to gift an item to a friend,
 from 5 valid Facebook accounts to 5 other valid accounts on each platform, 
 timing the local responses.
 \item The code will then run the same test 10 minutes later to check the 
 cooldown function.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time for local response
 \item Record local response to gift sending attempts
 \item Record what happens on the receiver end
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the gift sending was successful the first time
 \item Check that the gift sending was unsuccessful the second time
 \item Check that local response took under 5 seconds to receive
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.7: Payment Processing}
+\subsection{TES-14.7: Payment Processing}
 \begin{itemize}
 \item Goal: Determine that the user can make purchases properly, but only 
 when authenticated via Facebook.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that will first attempt to make several purchases, 
@@ -1720,26 +1686,34 @@ from 5 valid Facebook accounts on each platform, timing the responses.
 \item The code will then run then log out the users and attempt the same 
 purchases, timing the responses.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Measure elapsed time for response
 \item Record response to logged in purchase attempts
 \item Record response to logged out purchase attempts
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the purchase attempts were successful the first time
 \item Check that the purchase attempts were unsuccessful the second time
 \item Check that response took under 5 seconds to receive
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.8: Notifications}
+\subsection{TES-14.8: Notifications}
 \label{subsec:notifications}
 \begin{itemize}
 \item Goal: Determine that the user properly receives notifications when 
 they are enabled and does not receive them when they are disabled.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code that creates the following scenarios, recording 
@@ -1752,44 +1726,60 @@ notifications disabled.
 \item Friend beats user\textquoteright{}s high score
 \end{itemize}
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Record what happens when the notifications should appear
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the notifications properly appeared when enabled
 \item Check that the notifications did not appear when disabled
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.9: Data Synchronization}
+\subsection{TES-14.9: Data Synchronization}
 \label{subsec:sync}
 \begin{itemize}
 \item Goal: Determine that data synchronization works properly across 
 all platforms.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code on each platform, on a different Facebook account 
 per platform, to try to synchronize data with the server and see if the 
 data is replicated to the other devices.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Record what happens when synchronization is attempted
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the data is properly synchronized with the server
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
+\end{itemize}
 \end{itemize}
 
-\subsection{TES-15.10: Data Reset}
+\subsection{TES-14.10: Data Reset}
 \label{subsec:reset}
 \begin{itemize}
 \item Goal: Determine that resetting data works properly on all platforms.
+
 \item Testcases: 
 \begin{itemize}
 \item Write and run code on each platform, on a different Facebook account 
@@ -1797,14 +1787,22 @@ per platform, to try to reset the game data for the Facebook account.
 \item Write and run code on each platform, not logged into Facebook, to 
 try to reset local game data.
 \end{itemize}
+
 \item Capture the output 
 \begin{itemize}
 \item Record what happens when data resetting is attempted
 \end{itemize}
+
 \item Evaluate the output 
 \begin{itemize}
 \item Check that the data is properly reset account-wide
 \item Check that the data is properly reset locally
 \end{itemize}
+
 \item Generate report 
+\begin{itemize}
+\item Produce summary of generated reports (number of failures and successes)
+\item Evaluate automated testing summary with human confirmation in respect to the goal
 \end{itemize}
+\end{itemize}
+
