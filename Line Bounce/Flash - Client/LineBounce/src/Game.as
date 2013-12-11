@@ -5,7 +5,7 @@ package
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import controllers.GameViewController;
-	
+		
 	public class Game extends Sprite
 	{
 		public function Game()
@@ -23,6 +23,8 @@ package
 			this.addChild(GameViewController.initialize());
 			
 			GameViewController.enterGameView(GameViewController.getGameView("MainMenu"));
+			
+			Sounds.bgMusic.play(0, 999);
 			
 			trace("GameView Entered");
 		}

@@ -5,7 +5,8 @@ package gameViews
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextField;
-
+	import controllers.GameViewController;
+	
 	public class MainMenu extends Sprite implements GameView
 	{
 		private var playGameBtn:Button;
@@ -51,20 +52,25 @@ package gameViews
 			this.addChild(optionsBtn);
 			this.addChild(leaderboardsBtn);
 			
+			var y:int = 150;
+			
 			playGameBtn.x = (this.stage.width - playGameBtn.width) / 2;
-			playGameBtn.y = 150;
+			playGameBtn.y = y;
 			playGameBtn.fontSize = 36;
+			y+=150;
 			
 			shopBtn.x = playGameBtn.x
-			shopBtn.y = playGameBtn.y + 150;
+			shopBtn.y = y;
 			shopBtn.fontSize = 36;
+			y+=150;
 			
 			leaderboardsBtn.x = playGameBtn.x
-			leaderboardsBtn.y = shopBtn.y + 150;
+			leaderboardsBtn.y = y;
 			leaderboardsBtn.fontSize = 36;
+			y+=150;
 			
 			optionsBtn.x = playGameBtn.x
-			optionsBtn.y = leaderboardsBtn.y + 150;;
+			optionsBtn.y = y;;
 			optionsBtn.fontSize = 36;
 			
 			this.addEventListener(Event.TRIGGERED, onMenuChange);
@@ -81,14 +87,16 @@ package gameViews
 				GameViewController.enterGameView(GameViewController.getGameView("Shop"));
 			}
 			
-			else if (button = leaderboardsBtn){
+			else if (button == leaderboardsBtn){
 				GameViewController.exitGameView(GameViewController.getGameView("MainMenu"));
 				GameViewController.enterGameView(GameViewController.getGameView("Leaderboards"));
 			}
-			else if (button = optionsBtn) {
-				disposeTemporarily();
-				//load options state
+		
+			else if (button == optionsBtn) {
+				GameViewController.exitGameView(GameViewController.getGameView("MainMenu"));
+				GameViewController.enterGameView(GameViewController.getGameView("Options"));
 			}
+			trace(button.text);
 		}
 		
 		public function initialize():void
@@ -104,15 +112,6 @@ package gameViews
 		public function disposeTemporarily():void
 		{
 			this.visible = false;
-			/*
-			this.removeChild(bg);
-			this.removeChild(playGameBtn);
-			this.removeChild(shopBtn);
-			this.removeChild(optionsBtn);
-			this.removeChild(leaderboardsBtn);
-			this.removeEventListener(Event.TRIGGERED, onMenuChange);
-			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
-			*/
 		}
 		
 		public function pause():void
