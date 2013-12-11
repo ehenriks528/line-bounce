@@ -19,10 +19,9 @@ display to the device\textquoteright{}s screen, the image will be
 scaled, and there may or may not be blank space along the edge of
 the screen to accommodate the change in aspect ratio.
 
-\subsection{Game resolution will use vector graphics to scale viewport}
-\textbf{Description}: The game will use vector graphics for all of
-the graphical components (menus, avatars, sprites, etc.) so that scaling
-does not cause pixelation issue on platforms with larger screens. 
+\subsection{Game resolution will be scaleable}
+\textbf{Description}: Game resolution will be scaleable to different screen 
+sizes with no loss of quality.
 
 \subsection{The user should be able to mute the in-game sound }
 \textbf{Description}: The in-game sound should be split up into two different
@@ -92,13 +91,7 @@ so as not to infuriate users, so a 0.01-0.25 second window of lag
 time will be implemented.
 
 \subsection{Fast in-game response time}
-\textbf{Description}: The actual gameplay, we must provide a responsiveness
-that appears to be near-instantaneous to the human eye. The amount of lag time
-should be less than 24-33 milliseconds for each action. This includes
-time will be implemented.
-
-\subsection{Fast in-game response time}
-\textbf{Description}: The actual gameplay, we must provide a responsiveness
+\textbf{Description}: In the actual gameplay, we must provide a responsiveness
 that appears to be near-instantaneous to the human eye. The amount of lag time
 should be less than 33 milliseconds for each action. This includes
 the lag time between the moment a user presses the screen to draw
@@ -165,7 +158,7 @@ the avatar touches the platform and they have downward velocity.
 \subsection{Bounce acceleration calculation has at least 3 significant figures}
 \textbf{Description}: When the avatar collides with a platform the acceleration
 due to this bounce must be correctly calculated to within at least
-6 significant figures. Using linear algebraic mathematical formulas,
+3 significant figures. Using linear algebraic mathematical formulas,
 the game will calculate the angle that the avatar collided with a
 platform and find the reflection vector. That information is then
 used to apply an impulse to the avatar in the appropriate direction
@@ -205,12 +198,16 @@ It is accessible in the Settings menu.
 may include game modes, power-ups, enemy types, store categories and
 avatar customization.
 
+\subsection{Game needs to be able to handle input from mixed devices}
+\textbf{Description}: Different devices (mouse cloci, keys pushes or touch 
+of finger) should be handled accurately in the game.
+
 \section{Safety}
 \renewcommand\thesubsection{SAF-%
 \ifnum\value{subsection}<10 0\fi
 \arabic{subsection}}
 \subsection{Game should be family friendly (G-rated)}
-\textbf{Description}: Game will be made suitable to play for all audiences.
+\textbf{Description}: Game will be made suitable to play for all stakeholders.
 
 \subsection{Warn users of extended play sessions}
 \textbf{Description}: The game will warn users who have been playing for a
@@ -237,13 +234,13 @@ the transaction details. A small popup will be displayed on the current
 page with the item the user is purchasing as well as the price they
 are agreeing to pay.
 
-\subsection{Game will include a fail-soft database}
+\subsection{Game will include a fail-soft database (not implemented)}
 \textbf{Description}: Keep database information minimal so that the game does
 not have to connect to the database very often. There will also be
 a second database that will be synced up regularly with the original
 in case of a failure.
 
-\subsection{Backup database regularly}
+\subsection{Backup database regularly (not implemented)}
 \textbf{Description}: The database will be backed up every 15 minutes to minimize
 lost customer purchases.
 
@@ -257,7 +254,7 @@ allows the user to log in to their Facebook account securely. The
 game will need to use OAuth correctly for the game to be secure. Facebook
 provides information on correct implementation.
 
-\subsection{Game will use Facebook payment system}
+\subsection{Game will use Facebook payment system (not implemented)}
 \textbf{Description}: Facebook\textquoteright{}s API for secure payment transactions
 will be used, as requested by the client. This is the only method
 of payment accepted. The game will need to use the Facebook payment

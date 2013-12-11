@@ -3,8 +3,8 @@
 \renewcommand{\thesubsection}{GAME-%
 \ifnum\value{subsection}<10 0\fi
 \arabic{subsection}}
-\subsection{Player starts the game from the top of the screen}
-\textbf{Description}: The player should begin at the ceiling and accelerate
+\subsection{Player starts the game from the upper hald of the screen}
+\textbf{Description}: The player should begin above the middle of the screen and accelerate
 downward, leaving a few seconds to draw the first platform and begin
 playing.
 
@@ -45,16 +45,16 @@ as the avatar acquires them.
 the pause button allowing them bring up a separate screen menu to
 suspend play. This menu does not allow the user to see the gameplay
 in order to strategize. The pause menu allows the user to quit the
-game, go to the store (loses progress), restart the current game,
-and to be able to resume the game. There will be a one-second countdown
-when they click resume until the game begins again.
+game, restart the current game, and to be able to resume the game. 
+There will be a one-second countdown when they click resume until 
+the game begins again.
 
 \subsection{Screen never moves downwards}
 \textbf{Description}: The screen will only move upwards as the player
 jumps and will never move downward to follow the player\textquoteright{}s
 fall.
 
-\subsection{The activated power-ups will be displayed on the screen}
+\subsection{The activated power-ups will be displayed on the screen (not implemented)}
 \textbf{Description}: A list of the power-ups that are currently activated
 (in the form of a row of icons), will be displayed at the top of the
 screen during gameplay. These power-ups will be passive only and not
@@ -113,6 +113,11 @@ of the line has been established.
 the line, the avatar will always pass through the line, if the user
 has drawn the line through the avatar.
 
+\subsection{Power-up collection and activation doesn't affect movement}
+\textbf{Description}: Collision with power-ups will not affect avatar's 
+velocity or trajectory.
+
+
 \section{Menu}
 \renewcommand\thesubsection{MENU-%
 \ifnum\value{subsection}<10 0\fi
@@ -127,7 +132,7 @@ go to the leaderboards or return to the Main Menu.
 begin a new game, check the leaderboards, access the in-game store,
 invite friends through facebook, or adjust settings.
 
-\subsection{The Online Store will feature many purchasable items}
+\subsection{The Online Store will feature many purchasable items (not implemented)}
 \textbf{Description}: Users will be able to generate as well as buy
 in-game currency and other items such as power-ups, new skins/stages,
 new music, etc. This will represented by a list of categories that
@@ -136,8 +141,7 @@ item will have their price written next to them.
 
 \subsection{The Settings menu should allow users to change options}
 \textbf{Description}: The user should be able to log in and out of
-Facebook, sync his/her data, change whether or not they get in-game
-notifications, and reset their local history.
+Facebook, sync his/her data, and reset their local history.
 
 \subsection{The start screen will give the option of connecting to Facebook}
 \textbf{Description}: There will be a button that links to the Facebook
@@ -180,7 +184,7 @@ dialog will also notify the user that their progress will be synced
 to Facebook the next time they log in.
 
 \subsection{Backgrounding the application mid-playthrough will pause
-the game}
+the game (not implemented)}
 \textbf{Description}: Backgrounding the application (via a home button
 press, for example) will pause the game. The state of the game will
 be saved so that when the user returns he/she will be brought to the
@@ -195,20 +199,20 @@ all of the current playthrough\textquoteright{}s progress
 \renewcommand\thesubsection{SOC-%
 \ifnum\value{subsection}<10 0\fi
 \arabic{subsection}}
-\subsection{The user will be able to post a score to Facebook}
+\subsection{The user will be able to post a score to Facebook (not implemented)}
 \textbf{Description}: The user will be able to post a score to Facebook
 with a short message attached. This should be done without loading
 the social page.
 
-\subsection{The user must be able to access and post any previous scores}
+\subsection{The user must be able to access and post any previous scores (not implemented)}
 \textbf{Description}: This can be done from a tab on the Social Features
 page. The posts go to their Facebook wall.
 
-\subsection{The user will receive coins for inviting friends to play}
+\subsection{The user will receive coins for inviting friends to play (not implemented)}
 \textbf{Description}: An sent invite will earn the user a few coins,
 an accepted invitation will earn a much larger sum. 
 
-\subsection{Users will be able to send power-ups to friends}
+\subsection{Users will be able to send power-ups to friends (not implemented)}
 \textbf{Description}: Next to each name on the leaderboard, there
 will be an arrow icon. Tapping it will pop-up a confirmation page
 to send a power-up to that friend. After sending a power-up there
@@ -216,13 +220,13 @@ will be a cooldown period during which the user will be unable to
 send power-ups to the same friend.
 
 \subsection{The user will be alerted when they score higher than their
-friends}
+friends (not implemented)}
 \textbf{Description}: After a playthrough, a popup screen (before
 the game over screen) will notify the user if he/she scored higher
 than a friend\textquoteright{}s personal best during that playthrough.
 
 \subsection{The user will receive notifications about friends\textquoteright{}
-activities}
+activities (not implemented)}
 \textbf{Description}: The user will only receive notifications about
 activities involving the user directly. For example, the user will
 receive a notification if a friend gifts them a power-up, or if the
