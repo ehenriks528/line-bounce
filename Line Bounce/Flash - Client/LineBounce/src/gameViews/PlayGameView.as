@@ -23,12 +23,12 @@ package gameViews
 		
 		public function initialize():void
 		{
-			playController.visible = true;
+			playController.initialize();
 		}
 		
 		public function disposeTemporarily():void
 		{
-			playController.visible = false;
+			playController.disposeTemporarily();
 		}
 		
 		public function pause():void
