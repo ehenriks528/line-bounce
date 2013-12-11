@@ -1,5 +1,7 @@
 package gameViews
 {
+	import controllers.GameViewController;
+	
 	import feathers.controls.ImageLoader;
 	
 	import starling.display.Button;
@@ -41,9 +43,10 @@ package gameViews
 			this.addChild(title);
 			
 			homeBtn = new Button(Assets.getTexture("confirmButton"));
-			this.addChild(homeBtn);
+			homeBtn.text = "Home";
 			homeBtn.x = 25;
-			homeBtn.y = this.stage.y - 25;
+			homeBtn.y = this.stage.height - 80;	
+			this.addChild(homeBtn);
 			
 			userImage1 = new Image(Assets.getTexture("Spring"));
 			user1 = new userObject("ben", 400, userImage1);
@@ -55,7 +58,7 @@ package gameViews
 			arrayUser.push(user2);
 			
 			
-			//Test  make userobjects take imageloaders instead of images
+			/*Test  make userobjects take imageloaders instead of images
 			var loader:ImageLoader = new ImageLoader();
 			loader.source = "https://scontent-b.xx.fbcdn.net/hphotos-ash3/46630_10200551739269718_12025910_n.jpg";
 			this.addChild(loader);
@@ -63,7 +66,7 @@ package gameViews
 			loader.y = 400;
 			
 			//end test
-			
+			*/
 			//server client shenangians to get list of users for leaderboards
 			//positioning of user's info
 			var x:int = 50;
@@ -78,7 +81,18 @@ package gameViews
 				this.addChild(arrayUser[i].img);
 				this.addChild(arrayUser[i].text);
 				y += 100;
-				
+			}
+			
+			this.addEventListener(Event.TRIGGERED, onButtonPressed);
+		}
+		
+		private function onButtonPressed(event:Event):void
+		{
+			var button:Button = event.target as Button;
+			if (button == homeBtn) 
+			{
+				GameViewController.exitGameView(GameViewController.getGameView("Leaderboards"));
+				GameViewController.enterGameView(GameViewController.getGameView("MainMenu"));
 			}
 		}
 		
@@ -114,11 +128,7 @@ package gameViews
 		
 		public function disposeTemporarily():void
 		{
-			this.removeChild(user1.img);
-			this.removeChild(user1.text);
-			this.removeChild(user2.img);
-			this.removeChild(user2.text);
-			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
+			this.visible = false;
 		}
 		
 		public function pause():void

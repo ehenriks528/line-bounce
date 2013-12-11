@@ -26,8 +26,7 @@ package gameViews
 	
 	public class Test01GameView extends Sprite implements GameView
 	{
-		//private var APP_ID:String = "164181750458934"; 
-		private var APP_ID:String = "170059749705235";    
+		private var APP_ID:String = "164181750458934"; 
 		private var PERMISSIONS:Array = ["publish_stream","user_website","user_status","user_about_me"];
 		private var image:Image;
 		private var picture:Image;
@@ -45,9 +44,8 @@ package gameViews
 			
 			//Facebook.addJSEventListener("auth.sessionChange", initHandler);
 			//Facebook.init(APP_ID, initHandler, {cookie: true, appId: APP_ID, perms: PERMISSIONS});
-			Facebook.init(APP_ID, initHandler);
-			Facebook.login(loginHandler);
-			
+			//Facebook.init(APP_ID, initHandler);
+			//Facebook.login(loginHandler);
 			image = new Image(Assets.getTexture("testImage"));
 			this.addChild(image);
 			image.x = 0;

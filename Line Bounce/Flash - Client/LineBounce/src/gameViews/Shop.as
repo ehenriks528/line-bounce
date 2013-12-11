@@ -11,6 +11,8 @@ package gameViews
 	import starling.events.Event;
 	import starling.text.TextField;
 	
+	import controllers.GameViewController
+	
 	public class Shop extends Sprite implements GameView
 	{
 		private var bg:Image;
@@ -20,8 +22,12 @@ package gameViews
 		private var item1Text:TextField;
 		private var item2:Button;
 		private var item2Text:TextField;
-		private var item:Button;
-		private var itemText:TextField;
+		private var item3:Button;
+		private var item3Text:TextField;
+		private var item4:Button;
+		private var item4Text:TextField;
+		private var item5:Button;
+		private var item5Text:TextField;
 		
 		private var itemArray:Array;
 		
@@ -29,6 +35,7 @@ package gameViews
 		private var shop2:Button;
 		private var shop3:Button;
 		private var shop4:Button;
+		private var shop5:Button; //test
 		
 		//confirmation buttons
 		private var yb:Button;
@@ -54,8 +61,56 @@ package gameViews
 		
 		private function onAddedToStage():void
 		{
-			trace("shopmenu init");
 			drawScreen();
+		}
+		
+		private function drawScreen():void
+		{
+			bg = new Image(Assets.getTexture("shopBackground"));
+			this.addChild(bg);
+			
+			shopTitle = new TextField(400,100,"");
+			shopTitle.fontSize = 36;
+			shopTitle.x = (this.stage.width - shopTitle.width ) / 2; 
+			
+			//Load first page of shop (PowerUps)
+			loadShop1();
+			
+			//used to switch between different shops
+			shopCont = new ScrollContainer();
+			var shopLayout:HorizontalLayout = new HorizontalLayout();
+			shopLayout.gap = 3;
+			shopCont.layout = shopLayout;
+			shopCont.y = 113;
+			shopCont.width = 480;
+			
+			shop1 = new Button(Assets.getTexture("tabButton"));
+			shop2 = new Button(Assets.getTexture("tabButton"));	
+			shop3 = new Button(Assets.getTexture("tabButton"));
+			shop4 = new Button(Assets.getTexture("tabButton"));
+			shop5 = new Button(Assets.getTexture("tabButton"));
+			
+			shop1.text = "PowerUps";
+			shop2.text = "Skins";
+			shop3.text = "Backgrounds";
+			shop4.text = "Coins";
+			shop5.text = "test";
+			
+			shopCont.addChild(shop1);
+			shopCont.addChild(shop2);
+			shopCont.addChild(shop3);
+			shopCont.addChild(shop4);
+			shopCont.addChild(shop5);
+			
+			this.addChild(shopCont);
+			
+			homeBtn = new Button(Assets.getTexture("confirmButton"));
+			homeBtn.text = "Home";
+			homeBtn.x = 25;
+			homeBtn.y = this.stage.height - 80;	
+			this.addChild(homeBtn);
+			
+			this.addEventListener(Event.TRIGGERED, onShopChange);
 		}
 		
 		private function onButtonTriggered(event:Event):void
@@ -105,50 +160,6 @@ package gameViews
 		
 			}
 				
-		}
-		
-		private function drawScreen():void
-		{
-			bg = new Image(Assets.getTexture("Background"));
-			this.addChild(bg);
-			
-			shopTitle = new TextField(400,100,"");
-			shopTitle.fontSize = 36;
-			shopTitle.x = (this.stage.width - shopTitle.width ) / 2; 
-			
-			//Load first page of shop (PowerUps)
-			loadShop1();
-			
-			//used to switch between different shops
-			shopCont = new ScrollContainer();
-			var shopLayout:HorizontalLayout = new HorizontalLayout();
-			shopLayout.gap = 10;
-			shopCont.layout = shopLayout;
-			
-			shop1 = new Button(Assets.getTexture("tabButton"));
-			shop2 = new Button(Assets.getTexture("tabButton"));	
-			shop3 = new Button(Assets.getTexture("tabButton"));
-			shop4 = new Button(Assets.getTexture("tabButton"));
-			
-			shop1.text = "PowerUps";
-			shop2.text = "Skins";
-			shop3.text = "Backgrounds";
-			shop4.text = "Coins";
-			
-			shopCont.addChild(shop1);
-			shopCont.addChild(shop2);
-			shopCont.addChild(shop3);
-			shopCont.addChild(shop4);
-			shopCont.y = 113;
-			this.addChild(shopCont);
-			
-			homeBtn = new Button(Assets.getTexture("confirmButton"));
-			homeBtn.text = "Home";
-			homeBtn.x = 25;
-			homeBtn.y = this.stage.height - 80;	
-			this.addChild(homeBtn);
-			
-			this.addEventListener(Event.TRIGGERED, onShopChange);
 		}
 		
 		private function onShopChange(event:Event):void
@@ -238,31 +249,13 @@ package gameViews
 			
 			this.addEventListener(Event.TRIGGERED, onButtonTriggered);
 		}
-		private function addArrayToShop(iArray:Array):void{
-			for (var i:int = 0; i < iArray.length; i+=2) {
-				iArray[i].x = x;
-				iArray[i].y = y;
-				
-				iArray[i+1].x = (this.stage.width - iArray[i+1].width) / 2;
-				iArray[i+1].y = y - iArray[i].height / 3;
-				
-				itemCont.addChild(iArray[i]);
-				itemCont.addChild(iArray[i+1]);
-				
-				y += 100;
-			}
-		}
+	
 		
 		//loads shop skins
 		private function loadShop2():void
 		{
 			shopID = 1;
 			shopTitle.text = "Shop - Skins";
-			this.addChild(shopTitle);
-			
-			//initialize shop information
-			shopID = 0;
-			shopTitle.text = "Shop - Powerups";
 			this.addChild(shopTitle);
 			x = 50;
 			y = 30;
@@ -285,11 +278,6 @@ package gameViews
 			shopID = 2;
 			shopTitle.text = "Shop - Backgrounds";
 			this.addChild(shopTitle);
-			
-			//initialize shop information
-			shopID = 0;
-			shopTitle.text = "Shop - Powerups";
-			this.addChild(shopTitle);
 			x = 50;
 			y = 30;
 			
@@ -310,12 +298,6 @@ package gameViews
 		{
 			shopID = 3;
 			shopTitle.text = "Shop - Coins";
-			trace(shopTitle.text);
-			this.addChild(shopTitle);
-			
-			//initialize shop information
-			shopID = 0;
-			shopTitle.text = "Shop - Powerups";
 			this.addChild(shopTitle);
 			x = 50;
 			y = 30;
@@ -330,7 +312,50 @@ package gameViews
 			
 			//array for holding powerup images(buttons) and corresponding text fields
 			itemArray = new Array();
+			
+			item1 = new Button(Assets.getTexture("coin0"));
+			item1.name = "coin0";
+			item1Text = new TextField(300, 100, "$1 - 25 coins", "Verdana", 36);
+
+			item2 = new Button(Assets.getTexture("coin1"));
+			item2.name = "coin1";
+			item2Text = new TextField(300, 100, "$2 - 50 coins", "Verdana", 36);
+			
+			item3 = new Button(Assets.getTexture("coin2"));
+			item3.name = "coin2";
+			item3Text = new TextField(300, 100, "$3 - 100 coins", "Verdana", 36);
+			
+			item4 = new Button(Assets.getTexture("coin3"));
+			item4.name = "coin3";
+			item4Text = new TextField(300, 100, "$5 - 200 coins", "Verdana", 36);
+			
+			itemArray.push(item1);
+			itemArray.push(item1Text);
+			itemArray.push(item2);
+			itemArray.push(item2Text);
+			itemArray.push(item3);
+			itemArray.push(item3Text);
+			itemArray.push(item4);
+			itemArray.push(item4Text);
+			
+			addArrayToShop(itemArray);
 		}
+		
+		private function addArrayToShop(iArray:Array):void{
+			for (var i:int = 0; i < iArray.length; i+=2) {
+				iArray[i].x = x;
+				iArray[i].y = y;
+				
+				iArray[i+1].x = (this.stage.width - iArray[i+1].width) / 2;
+				iArray[i+1].y = y - iArray[i].height / 3;
+				
+				itemCont.addChild(iArray[i]);
+				itemCont.addChild(iArray[i+1]);
+				
+				y += 100;
+			}
+		}
+		
 		public function update(delta:int):void 
 		{
 			
