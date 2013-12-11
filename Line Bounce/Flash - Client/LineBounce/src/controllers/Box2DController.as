@@ -146,5 +146,12 @@ package controllers
 			angle.Set(rotate);
 			body.SetTransform(new b2Transform(body.GetWorldCenter(),angle));
 		}
+		
+		/**
+		 * Updates Box2D objects, requires the milliseconds that have passed since the last update.
+		 */
+		public function update(delta:int){
+			world.Step(delta/1000, 10, 10);
+		}
 	}
 }
